@@ -8,6 +8,7 @@ DEPENDS = "dbus libnetfilter-queue utopia ccsp-lm-lite telemetry"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
 require ccsp_common.inc
+CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-sign-compare "
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/hotspot;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=hotspot"
 
 SRCREV_hotspot = "${AUTOREV}"
