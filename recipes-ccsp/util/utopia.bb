@@ -31,6 +31,7 @@ CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-confi
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 DEPENDS_remove_class-native = " safec-native"
+CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-sign-compare -Wno-deprecated-declarations -Wno-type-limits -Wno-unused-parameter -Wno-return-local-addr "
 
 CFLAGS += " \
     -I${STAGING_INCDIR}/ccsp \
@@ -38,7 +39,7 @@ CFLAGS += " \
     -I${STAGING_INCDIR}/cimplog \
     "
 
-CFLAGS_append_dunfell = " -I${STAGING_INCDIR}/tirpc"
+CFLAGS_append_dunfell = " -I${STAGING_INCDIR}/tirpc -Wno-cast-function-type -Wno-address-of-packed-member "
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'bci', '-DCISCO_CONFIG_TRUE_STATIC_IP -DCISCO_CONFIG_DHCPV6_PREFIX_DELEGATION', '', d)}"
 
