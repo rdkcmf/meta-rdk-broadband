@@ -14,6 +14,10 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
+CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-sign-compare -Wno-type-limits -Wno-unused-parameter "
+
+CFLAGS_append_dunfell = " -Wno-format-truncation -Wno-format-overflow "
+
 RDEPENDS_${PN}_append_dunfell = " bash"
 RDEPENDS_${PN}-ccsp_append_dunfell += " bash"
 
