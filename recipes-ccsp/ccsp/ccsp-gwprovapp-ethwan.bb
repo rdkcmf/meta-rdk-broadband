@@ -19,6 +19,10 @@ S = "${WORKDIR}/git"
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'bci', '-DCISCO_CONFIG_TRUE_STATIC_IP -DCISCO_CONFIG_DHCPV6_PREFIX_DELEGATION', '', d)}"
 
+CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-pointer-to-int-cast "
+
+CFLAGS_append_dunfell = " -Wno-format-truncation -Wno-format-overflow "
+
 LDFLAGS_append_dunfell = " -lgwprovappabs"
 
 inherit autotools
