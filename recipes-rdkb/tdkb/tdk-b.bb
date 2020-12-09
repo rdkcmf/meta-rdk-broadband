@@ -11,7 +11,7 @@ SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 
-DEPENDS += "jsoncpp jsonrpc ccsp-common-library ccsp-lm-lite hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi ccsp-cm-agent ccsp-mta-agent ccsp-p-and-m ccsp-wifi-agent test-and-diagnostic trower-base64"
+DEPENDS += "jsoncpp jsonrpc ccsp-common-library ccsp-lm-lite hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi ccsp-cm-agent ccsp-mta-agent ccsp-p-and-m ccsp-wifi-agent test-and-diagnostic trower-base64 rbus-core"
 
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
@@ -23,6 +23,10 @@ tdkdir = "/usr/ccsp/tdk/"
 
 inherit autotools systemd coverity
 
+CFLAGS += " -Wall -Werror -Wextra -Wno-unused-parameter -Wno-unused-but-set-parameter -Wno-pointer-sign -Wno-sign-compare -Wno-implicit-function-declaration "
+
+CFLAGS_append_dunfell = " -Wno-format-overflow -Wno-write-strings "
+
 CFLAGS_append = " \
     -I=${includedir}/dbus-1.0 \
     -I=${libdir}/dbus-1.0/include \
@@ -31,6 +35,7 @@ CFLAGS_append = " \
     -I=${includedir}/middle_layer_src/mta \
     -I=${includedir}/middle_layer_src/cm \
     -I=${includedir}/middle_layer_src/wifi \
+    -I=${includedir}/cimplog \
     "
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
