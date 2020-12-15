@@ -11,6 +11,9 @@ require recipes-ccsp/ccsp/ccsp_common.inc
 inherit comcast-breakpad
 BREAKPAD_BIN_append = " parodusStart"
 
+CFLAGS += " -Wall -Werror -Wextra "
+CFLAGS_append_dunfell = " -Wno-format-truncation "
+
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/generic/startParodus;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=startParodus"
 SRCREV = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
@@ -29,8 +32,8 @@ CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-confi
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 
-CFLAGS_append = "-I${STAGING_INCDIR} -I${STAGING_INCDIR}/ccsp -I${STAGING_INCDIR}/syscfg -I${STAGING_INCDIR}/cjson -DFEATURE_DNS_QUERY -DXPKI_CERT_SUPPORT"
-CFLAGS_append =   "${@bb.utils.contains("DISTRO_FEATURES", "seshat", " -DENABLE_SESHAT ", " ", d)} "
+CFLAGS_append = " -I${STAGING_INCDIR} -I${STAGING_INCDIR}/ccsp -I${STAGING_INCDIR}/syscfg -I${STAGING_INCDIR}/cjson -DFEATURE_DNS_QUERY -DXPKI_CERT_SUPPORT"
+CFLAGS_append = " ${@bb.utils.contains("DISTRO_FEATURES", "seshat", " -DENABLE_SESHAT ", " ", d)} "
 
 # generating minidumps
 PACKAGECONFIG_append = " breakpad"
