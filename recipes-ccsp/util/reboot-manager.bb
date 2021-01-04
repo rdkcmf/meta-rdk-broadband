@@ -18,6 +18,8 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
+CFLAGS += " -Wall -Werror -Wextra -Wno-unused-parameter"
+
 CFLAGS_append = " \
     -I=${includedir}/dbus-1.0 \
     -I=${libdir}/dbus-1.0/include \
