@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 RPROVIDES_${PN} = "ccsp-p-and-m"
 
-DEPENDS = "ccsp-common-library ccsp-lm-lite telemetry"
+DEPENDS = "ccsp-common-library ccsp-lm-lite telemetry ccsp-hotspot"
 DEPENDS_append = " utopia hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi curl ccsp-misc ccsp-hotspot cjson libsyswrapper cjson trower-base64 msgpack-c nanomsg cimplog wrp-c libparodus"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 

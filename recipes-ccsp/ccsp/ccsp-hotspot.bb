@@ -35,27 +35,31 @@ LDFLAGS += "-ldbus-1 -ltelemetry_msgsender -lbreakpadwrapper"
 
 do_compile_prepend(){
     (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/source/hotspotfd/config/hotspot.XML ${S}/source/hotspotfd/dm_pack_datamodel.c)
-}   
+}
+
 do_install_append () {
     # Config files and scripts
 	install -d ${D}/usr/ccsp
 	install -d ${D}/usr/ccsp/hotspot
 	install -d ${D}/usr/include/ccsp
-    
+
 	install -m 777 ${D}/usr/bin/hotspot_arpd -t ${D}/usr/ccsp
 	install -m 644 ${S}/source/hotspotfd/include/dhcpsnooper.h ${D}/usr/include/ccsp
 	install -m 644 ${S}/source/hotspotfd/include/hotspotfd.h ${D}/usr/include/ccsp
-    ln -sf /usr/bin/CcspHotspot ${D}${prefix}/ccsp/hotspot/CcspHotspot
+    	install -m 777 ${S}/source/HotspotApi/libHotspotApi.h ${D}/usr/include/ccsp
+    	ln -sf /usr/bin/CcspHotspot ${D}${prefix}/ccsp/hotspot/CcspHotspot
 }
-    
+
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN}-ccsp = " \
     /usr/ccsp/hotspot_arpd \
     /usr/ccsp/* \
-    "  
+    "
 FILES_${PN} += " \
     ${prefix}/ccsp/hotspot/CcspHotspot \
+    ${prefix}/ccsp/hotspot/hotspot.XML  \
+    ${libdir}/libHotspotApi.so* \
 	"
 
 FILES_${PN}-dbg = " \
