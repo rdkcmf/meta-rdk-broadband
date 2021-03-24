@@ -11,6 +11,8 @@ SRC_URI = "\
     ${CMF_GIT_ROOT}/rdkb/devices/rdkbemu/rdkbemu_xb3;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};destsuffix=xb3;name=xb3 \
     "
 
+FILESEXTRAPATHS_prepend := "${THISDIR}/ccsp-webui-bci:"
+
 SRC_URI_append = " \
                  file://cosalogs.service \
                  file://cosalogs.sh \
