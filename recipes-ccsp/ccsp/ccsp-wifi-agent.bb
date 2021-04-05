@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/belvedere-yocto/CcspWifiAgent"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi utopia cimplog libparodus avro-c telemetry libsyswrapper"
+DEPENDS = "ccsp-common-library hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi utopia cimplog libparodus avro-c telemetry libsyswrapper libev"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
@@ -82,6 +82,7 @@ do_install_append () {
     install -m 775 ${S}/config-atom/CcspDmLib.cfg -t ${D}/usr/ccsp/wifi
     install -m 664 ${S}/config-atom/WifiSingleClient.avsc -t ${D}/usr/ccsp/wifi
     install -m 664 ${S}/config-atom/WifiSingleClientActiveMeasurement.avsc -t ${D}/usr/ccsp/wifi
+    install -m 664 ${S}/config-atom/rdkb-wifi.ovsschema -t ${D}/usr/ccsp/wifi
     install -d ${D}/usr/include/ccsp
     install -d ${D}/usr/include/middle_layer_src
     install -d ${D}/usr/include/middle_layer_src/wifi
@@ -130,6 +131,7 @@ FILES_${PN} = " \
     ${prefix}/ccsp/wifi/CcspDmLib.cfg \
     ${prefix}/ccsp/wifi/WifiSingleClient.avsc \
     ${prefix}/ccsp/wifi/WifiSingleClientActiveMeasurement.avsc \
+    ${prefix}/ccsp/wifi/rdkb-wifi.ovsschema \
 "
 
 FILES_${PN}-dbg = " \
