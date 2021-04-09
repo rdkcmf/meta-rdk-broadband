@@ -24,11 +24,11 @@ CFLAGS_append_dunfell = " -Wno-format-truncation -Wno-format-overflow -Wno-depre
 
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/CcspPandM;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=CcspPandM"
 
-SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'file://0001-disable-fwupgrade-dm.patch', '', d)}"
+#SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'file://0001-disable-fwupgrade-dm.patch', '', d)}"
 
 SRC_URI_append_dunfell = " file://0001-openssl-1.1.x-compatibility-in-HMAC-functions.patch"
-SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'file://0002-disable-dhcp-clients-tr181-dml-in-PandM.patch', '', d)}"
-SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'file://0003-disable-ppp-tr181-dml-in-PandM.patch', '', d)}"
+#SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'file://0002-disable-dhcp-clients-tr181-dml-in-PandM.patch', '', d)}"
+#SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'file://0003-disable-ppp-tr181-dml-in-PandM.patch', '', d)}"
 
 SRCREV_CcspPandM = "${AUTOREV}"
 SRCREV_FORMAT = "CcspPandM"
@@ -97,11 +97,48 @@ LDFLAGS_append = " \
 LDFLAGS_append_dunfell = " -lsyscfg"
 
 do_compile_prepend () {
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'interworking', 'true', 'false', d)}; then
+    sed -i '2i <?define FEATURE_SUPPORT_INTERWORKING=True?>' ${S}/config-arm/TR181-USGv2.XML
+    fi
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'dslite', 'true', 'false', d)}; then
+    sed -i '2i <?define DSLITE_FEATURE_SUPPORT=True?>' ${S}/config-arm/TR181-USGv2.XML
+    fi
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'passpoint', 'true', 'false', d)}; then
+    sed -i '2i <?define FEATURE_SUPPORT_PASSPOINT=True?>' ${S}/config-arm/TR181-USGv2.XML
+    fi
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'fwupgrade_manager', 'true', 'false', d)}; then
+    sed -i '2i <?define FEATURE_FWUPGRADE_MANAGER=True?>' ${S}/config-arm/TR181-USGv2.XML
+    fi
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_xdsl_ppp_manager', 'true', 'false', d)}; then
+    sed -i '2i <?define FEATURE_RDKB_XDSL_PPP_MANAGER=True?>' ${S}/config-arm/TR181-USGv2.XML
+    fi
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'true', 'false', d)}; then
+    sed -i '2i <?define FEATURE_RDKB_WAN_MANAGER=True?>' ${S}/config-arm/TR181-USGv2.XML
+    fi
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'RadiusGreyList', 'true', 'false', d)}; then
+    sed -i '2i <?define FEATURE_SUPPORT_RADIUSGREYLIST=True?>' ${S}/config-arm/TR181-USGv2.XML
+    fi
+    sed -i '2i <?define CONFIG_INTERNET2P0=True?>' ${S}/config-arm/TR181-USGv2.XML
+    sed -i '2i <?define CONFIG_VENDOR_CUSTOMER_COMCAST=True?>' ${S}/config-arm/TR181-USGv2.XML
+    sed -i '2i <?define CONFIG_CISCO_HOTSPOT=True?>' ${S}/config-arm/TR181-USGv2.XML
+    
+
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'bci', 'true', 'false', d)}; then
-		(python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config-arm/TR181-USGv2_bci.XML ${S}/source/PandMSsp/dm_pack_datamodel.c)
+		sed -i '2i <?define BCI=True?>' ${S}/config-arm/TR181-USGv2.XML
+        sed -i '2i <?define COSA_FOR_BCI=True?>' ${S}/config-arm/TR181-USGv2.XML
+        sed -i '2i <?define CONFIG_CISCO_TRUE_STATIC_IP=True?>' ${S}/config-arm/TR181-USGv2.XML
+        sed -i '2i <?define CONFIG_CISCO_FILE_TRANSFER=True?>' ${S}/config-arm/TR181-USGv2.XML
+        
 	else
-		(python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config-arm/TR181-USGv2.XML ${S}/source/PandMSsp/dm_pack_datamodel.c)
+        sed -i '2i <?define FEATURE_SUPPORT_ONBOARD_LOGGING=True?>' ${S}/config-arm/TR181-USGv2.XML
+        sed -i '2i <?define MOCA_HOME_ISOLATION=True?>' ${S}/config-arm/TR181-USGv2.XML
+
+        if ${@bb.utils.contains('DISTRO_FEATURES', 'ddns_broadband', 'true', 'false', d)}; then
+        sed -i '2i <?define DDNS_BROADBANDFORUM=True?>' ${S}/config-arm/TR181-USGv2.XML
+        fi
 	fi
+    (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config-arm/TR181-USGv2.XML ${S}/source/PandMSsp/dm_pack_datamodel.c)
 
 }
 do_install_append () {
