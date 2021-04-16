@@ -13,7 +13,7 @@ RDEPENDS_${PN}_append = "${@bb.utils.contains("DISTRO_FEATURES", "webconfig_phas
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 
-SRCREV = "${@bb.utils.contains("DISTRO_FEATURES", "webconfig_phase1", "93b5546d764dda663c78830d93106db85244e8de", "50fbcbd625a807cdaf4fd03be855fc6d9116c732", d)}"
+SRCREV = "${@bb.utils.contains("DISTRO_FEATURES", "webconfig_phase1", "748f7ac1a25588b28e56771a8446cbce4306c091", "50fbcbd625a807cdaf4fd03be855fc6d9116c732", d)}"
 
 do_configure_prepend () {
     (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/source/arch/intel_usg/boards/rdkb_atom/config/comcast/WebpaAgent.xml ${S}/source/broadband/dm_pack_datamodel.c)

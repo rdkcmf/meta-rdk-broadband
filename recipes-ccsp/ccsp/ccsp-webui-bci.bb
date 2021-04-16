@@ -12,7 +12,6 @@ SRC_URI = "\
     "
 
 SRC_URI_append = " \
-                 file://LICENSE \
                  file://cosalogs.service \
                  file://cosalogs.sh \
                  file://ajax_maintenance_window_conf.php \
@@ -47,7 +46,6 @@ LDFLAGS += " \
      -lsso \
      "
 do_configure_prepend () {
-	cp -fr ${WORKDIR}/LICENSE ${S}
 	(cd ${S} && ${STAGING_BINDIR_CROSS}/phpize && aclocal && libtoolize --force && autoreconf)
 }
 
