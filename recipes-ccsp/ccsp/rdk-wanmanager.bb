@@ -17,7 +17,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig pythonnative
 
 CFLAGS_append = " \
     -I${STAGING_INCDIR} \
@@ -32,6 +32,11 @@ LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '
 
 LDFLAGS += " -lprivilege"
 
+do_compile_prepend () {
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'true', 'false', d)}; then
+        (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config/RdkWanManager.xml ${S}/source/WanManager/dm_pack_datamodel.c)
+    fi
+}
 
 do_install_append () {
     # Config files and scripts
