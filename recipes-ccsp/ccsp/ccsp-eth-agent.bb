@@ -50,6 +50,7 @@ LDFLAGS_append = " \
     -lutctx \
     -lutapi \
     -lcimplog \
+    -lrt \
     -lprivilege \
     "
 LDFLAGS_append_dunfell = " -lsyscfg"
