@@ -46,6 +46,7 @@ LDFLAGS += " \
     -ldbus-1 \
     -lrbus-core \
     -lrtMessage \
+    -lrbus \
     "
 
 do_configure_class-native () {
