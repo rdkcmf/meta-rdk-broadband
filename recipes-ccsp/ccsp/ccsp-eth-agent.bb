@@ -4,7 +4,6 @@ SECTION = "console/utils"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-HASWANMANAGER = "${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'true', 'false', d)}"
 DEPENDS = "ccsp-common-library dbus utopia hal-ethsw hal-platform curl ccsp-lm-lite cimplog libunpriv"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', ' json-hal-lib', '',d)}"
@@ -67,14 +66,5 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}${exec_prefix}/ccsp/ethagent
     install -m 644 ${S}/config/TR181-EthAgent.xml ${D}${exec_prefix}/ccsp/ethagent/TR181-EthAgent.xml
-    if [ ${HASWANMANAGER} = "true" ]; then
-        install -d ${D}${sysconfdir}/rdk/conf
-        install -m 644 ${S}/config/eth_manager_conf.json ${D}${sysconfdir}/rdk/conf
-        # Json Schema file.
-        install -d ${D}/${sysconfdir}/rdk/schemas
-        install -m 644 ${S}/hal_schema/eth_hal_schema.json ${D}/${sysconfdir}/rdk/schemas
-    fi
 }
 FILES_${PN} += " ${exec_prefix}/ccsp/ethagent"
-FILES_${PN} += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '${sysconfdir}/rdk/conf/eth_manager_conf.json','', d)}"
-FILES_${PN} += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '${sysconfdir}/rdk/schemas/eth_hal_schema.json','', d)}"
