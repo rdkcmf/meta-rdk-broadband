@@ -84,6 +84,9 @@ CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_cellular_manag
 # Adding flag for inter-device manager
 CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_inter_device_manager', '-DFEATURE_RDKB_INTER_DEVICE_MANAGER', '', d)}"
 
+# Add flags to support MAP-T NAT46 Feature
+CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'nat46', '-DFEATURE_SUPPORT_MAPT_NAT46', '', d)}"
+
 FILES_${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP_${PN} += "dev-so"
