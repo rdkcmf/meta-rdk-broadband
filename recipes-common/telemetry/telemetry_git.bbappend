@@ -1,4 +1,4 @@
-DEPENDS += " ccsp-common-library"
+DEPENDS += " ccsp-common-library webconfig-framework"
 
 CFLAGS += " -DCCSP_SUPPORT_ENABLED \
             -DENABLE_RDKB_SUPPORT \

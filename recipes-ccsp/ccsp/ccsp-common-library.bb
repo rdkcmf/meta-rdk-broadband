@@ -57,7 +57,6 @@ do_compile_class-native () {
 do_install_append_class-target () {
     install -d ${D}/usr/include/ccsp
     install -d ${D}/usr/include/ccsp/linux
-    install -m 644 ${S}/WebConfig_Framework/*.h ${D}/usr/include/ccsp
     install -m 644 ${S}/source/debug_api/include/*.h ${D}/usr/include/ccsp
     install -m 644 ${S}/source/util_api/ansc/include/*.h ${D}/usr/include/ccsp
     install -m 644 ${S}/source/util_api/asn.1/include/*.h ${D}/usr/include/ccsp
