@@ -62,6 +62,9 @@ CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_gpon_manager', 
 # Add flags to support XDSL And PPP Feature
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_xdsl_ppp_manager', '-DFEATURE_RDKB_XDSL_PPP_MANAGER', '', d)}"
 
+#Add flags to support WiFi PSM DB
+CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'wifi-psm-db', '-DFEATURE_SUPPORT_WIFIDB', '', d)}"
+
 FILES_${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP_${PN} += "dev-so"
