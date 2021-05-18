@@ -3,8 +3,7 @@ SUMMARY = "TELCO VOICE Manager component"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library dbus rdk-logger utopia libparodus wrp-c trower-base64 nanomsg"
-
+DEPENDS = "ccsp-common-library dbus rdk-logger utopia libparodus wrp-c trower-base64 nanomsg libunpriv"
 require ccsp_common.inc
 
 SRC_URI ="${RDKB_CCSP_ROOT_GIT}/RdkTelcoVoiceManager/generic;protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=TelcoVOICEManager"
@@ -55,6 +54,7 @@ LDFLAGS_append = " \
     -lrt \
     -lsysevent \
     -lcjson \
+    -lprivilege \
 "
 
 do_install_append () {

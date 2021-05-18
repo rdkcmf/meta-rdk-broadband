@@ -3,7 +3,7 @@ SUMMARY = "RDK VLAN Manager component"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library dbus rdk-logger utopia hal-platform json-hal-lib"
+DEPENDS = "ccsp-common-library dbus rdk-logger utopia hal-platform json-hal-lib libunpriv"
 
 require ccsp_common.inc
 
@@ -26,6 +26,9 @@ CFLAGS_append = " \
     -I ${STAGING_INCDIR}/syscfg \
     -I ${STAGING_INCDIR}/sysevent \
     "
+
+LDFLAGS += " -lprivilege"
+
 CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '-DFEATURE_RDKB_WAN_MANAGER', '', d)}"
 
 do_install_append () {

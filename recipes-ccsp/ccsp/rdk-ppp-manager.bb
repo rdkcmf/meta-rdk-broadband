@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
 
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library dbus rdk-logger utopia halinterface"
+DEPENDS = "ccsp-common-library dbus rdk-logger utopia halinterface libunpriv"
 
 require ccsp_common.inc
 
@@ -29,6 +29,9 @@ CFLAGS_append = " \
     -I${STAGING_INCDIR}/utapi \
     -I${STAGING_INCDIR}/utctx \
     "
+
+LDFLAGS += " -lprivilege"
+
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' -fPIC -I${STAGING_INCDIR}/libsafec', '-fPIC', d)}"
 LDFLAGS_append_dunfell = " -ldbus-1"
 

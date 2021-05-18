@@ -3,8 +3,7 @@ SUMMARY = "RdkXdslManager component"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library dbus rdk-logger utopia json-hal-lib avro-c hal-platform libparodus"
-
+DEPENDS = "ccsp-common-library dbus rdk-logger utopia json-hal-lib avro-c hal-platform libparodus libunpriv"
 require ccsp_common.inc
 
 SRC_URI ="${RDKB_CCSP_ROOT_GIT}/RdkXdslManager/generic;protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=xDSLManager"
@@ -31,6 +30,9 @@ CFLAGS_append = " \
 DEPENDS_append = "${@bb.utils.contains("DISTRO_FEATURES", "seshat", " libseshat ", " ", d)}"
 CFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "seshat", " -DENABLE_SESHAT ", " ", d)}"
 LDFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "seshat", " -llibseshat ", " ", d)}"
+
+LDFLAGS += " -lprivilege"
+
 CFLAGS_append = "\
     ${@bb.utils.contains("DISTRO_FEATURES", "seshat", "-I${STAGING_INCDIR}/libseshat ", " ", d)} \
 "

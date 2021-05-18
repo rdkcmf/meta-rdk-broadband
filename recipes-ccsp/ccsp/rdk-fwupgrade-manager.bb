@@ -2,8 +2,7 @@ SUMMARY = "RDK Firmware Upgrade Manager component"
 
 LICENSE = "CLOSED"
 
-DEPENDS = "ccsp-common-library hal-cm dbus rdk-logger utopia halinterface hal-fwupgrade"
-
+DEPENDS = "ccsp-common-library hal-cm dbus rdk-logger utopia halinterface hal-fwupgrade libunpriv"
 require ccsp_common.inc
 
 SRC_URI ="${RDKB_CCSP_ROOT_GIT}/RdkPlatformManager/generic;protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=FwUpgradeManager"
@@ -25,6 +24,9 @@ CFLAGS_append = " \
     -I ${STAGING_INCDIR}/syscfg \
     -I ${STAGING_INCDIR}/sysevent \
     "
+
+LDFLAGS += " -lprivilege"
+
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' -fPIC -I${STAGING_INCDIR}/libsafec', '-fPIC', d)}"
 CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '-DFEATURE_RDKB_WAN_MANAGER', '', d)}"
 
