@@ -7,6 +7,8 @@ PV = "${RDK_RELEASE}"
 SRCREV_hwselftest = "${AUTOREV}"
 SRCREV_FORMAT = "hwselftest"
 
+require recipes-ccsp/ccsp/ccsp_common.inc
+
 SRC_URI = "${RDK_GENERIC_ROOT_GIT}/hwselftest-rdkb/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH};name=hwselftest"
 S = "${WORKDIR}/git"
 
@@ -15,7 +17,7 @@ CFLAGS += " -I=${includedir}/dbus-1.0 -I=${libdir}/dbus-1.0/include -I=${include
 LDFLAGS_append = " -ldbus-1 -lpthread -lhal_platform"
 
 EXTRA_OECONF += "--enable-agent-build --enable-client-build --enable-hwselftesttrigger-build"
-EXTRA_OECONF += " --with-diag-emmc --with-diag-moca --with-diag-docsis --with-diag-bluetooth --with-diag-dram --with-diag-wifi --with-diag-mta --with-diag-xhs --with-diag-lan --with-diag-zigbee"
+EXTRA_OECONF += " --with-diag-emmc --with-diag-moca --with-diag-wan --with-diag-bluetooth --with-diag-dram --with-diag-wifi --with-diag-mta --with-diag-xhs --with-diag-lan --with-diag-zigbee"
 
 DEPENDS = "jansson breakpad breakpad-wrapper xupnp ccsp-common-library dbus hal-platform"
 RDEPENDS_${PN}_append_dunfell = "bash"
