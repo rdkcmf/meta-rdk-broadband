@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 DEPENDS = "ccsp-common-library utopia avro-c msgpack-c trower-base64 util-linux curl libxml2 wrp-c nanomsg libparodus cimplog telemetry libsyswrapper"
-
+DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 require ccsp_common.inc
 
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/CcspLMLite;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=CcspLMLite"
@@ -50,6 +50,11 @@ CFLAGS_append = "\
 "
 CFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "mlt", " -DMLT_ENABLED -DUSE_SYSRES_MLT=1 -DRETURN_ADDRESS_LEVEL=0 ", " ", d)}"
 LDFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "mlt", " -lsysResource ", " ", d)}"
+
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
+
+LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 
 do_compile_prepend () {
 	(python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config/LMLite.XML ${S}/source/Ssp/dm_pack_datamodel.c)
