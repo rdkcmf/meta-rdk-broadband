@@ -11,11 +11,11 @@ SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 
-DEPENDS += "jsoncpp jsonrpc ccsp-common-library ccsp-lm-lite hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi ccsp-cm-agent ccsp-mta-agent ccsp-p-and-m ccsp-wifi-agent test-and-diagnostic trower-base64 base64"
+DEPENDS += "jsoncpp jsonrpc ccsp-common-library ccsp-lm-lite hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi ccsp-cm-agent ccsp-mta-agent ccsp-p-and-m ccsp-wifi-agent test-and-diagnostic trower-base64"
 
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
-RDEPENDS_${PN} = "jsoncpp jsonrpc ccsp-cm-agent bash base64 trower-base64"
+RDEPENDS_${PN} = "jsoncpp jsonrpc ccsp-cm-agent bash trower-base64"
 
 require recipes-ccsp/ccsp/ccsp_common.inc
 
