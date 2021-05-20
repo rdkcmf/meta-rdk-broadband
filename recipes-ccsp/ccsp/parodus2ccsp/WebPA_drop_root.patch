@@ -1,0 +1,39 @@
+Date: August 25, 2020 1:41 PM
+From: Iac5629e0e058f5814b90781dc10d6951b43fc4d1 August 25, 2020 1:41 PM
+Subject: RDKB-29192
+Source: COMCAST
+License: Apache-2.0
+Upstream-Status: Pending
+Signed-off-by: mkrish802 <Manoj_Krishnan@comcast.com>
+
+Index: git/source/app/privilege.c
+===================================================================
+--- git.orig/source/app/privilege.c
++++ git/source/app/privilege.c
+@@ -1,6 +1,25 @@
+ #include "privilege.h"
++#include "webpa_adapter.h"
++#include "cap.h"
++#include "syscfg/syscfg.h"
++
++static cap_user appcaps;
+ 
+ void drop_root_privilege()
+ {
+-
++   char buf[8] = {'\0'};
++   appcaps.caps = NULL;
++   appcaps.user_name = NULL;
++   syscfg_init();
++   syscfg_get( NULL, "NonRootSupport", buf, sizeof(buf));
++   if( buf != NULL )
++   {
++      if (strncmp(buf, "true", strlen("true")) == 0) {
++         init_capability();
++         drop_root_caps(&appcaps);
++         update_process_caps(&appcaps);
++         read_capability(&appcaps);
++      }
++      WalInfo("WEBPA RFC Setting for NonRootSupport is: %s\n",buf);
++  }
+ }

@@ -1,0 +1,81 @@
+SUMMARY = "CCSP PsmSsp component"
+HOMEPAGE = "http://github.com/belvedere-yocto/CcspPsm"
+
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
+
+
+DEPENDS = "ccsp-common-library dbus utopia libunpriv"
+DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
+DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
+
+require ccsp_common.inc
+
+SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/CcspPsm;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=CcspPsm"
+
+SRCREV_CcspPsm = "${AUTOREV}"
+SRCREV_FORMAT = "CcspPsm"
+PV = "${RDK_RELEASE}"
+
+S = "${WORKDIR}/git"
+
+inherit autotools
+
+CFLAGS += " -Wall -Werror -Wextra "
+
+CFLAGS_append_dunfell = " -Wno-restrict -Wno-format-overflow "
+
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
+
+LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
+LDFLAGS_remove_dunfell = "${@bb.utils.contains('DISTRO_FEATURES', 'safec', '-lsafec-3.5', '', d)}"
+LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'safec dunfell', ' -lsafec-3.5.1 ', '', d)}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
+
+LDFLAGS +=" -lprivilege -lsyscfg"
+EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-notify', '', d)}"
+
+CFLAGS_append = " \
+    -I=${includedir}/dbus-1.0 \
+    -I=${libdir}/dbus-1.0/include \
+    -I=${includedir}/ccsp \
+    -I${STAGING_INCDIR}/syscfg \
+    "
+
+LDFLAGS_append = " \
+    -ldbus-1 \
+    "
+
+do_install_append () {
+    # Config files and scripts
+    install -d ${D}/usr/ccsp
+    install -d ${D}/usr/ccsp/psm
+    ln -sf /usr/bin/PsmSsp ${D}/usr/ccsp/PsmSsp
+}
+
+do_install_append_qemux86 () {
+    # Config files and scripts
+    install -d ${D}/usr/ccsp/config
+    install -m 644 ${S}/config/bbhm_def_cfg_pc.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+}
+
+do_install_append_qemuarm () {
+    # Config files and scripts
+    install -d ${D}/usr/ccsp/config
+    install -m 644 ${S}/config/bbhm_def_cfg_qemu.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+}
+
+PACKAGES += "${PN}-ccsp"
+
+FILES_${PN}-ccsp = " \
+    ${prefix}/ccsp/psm \
+    ${prefix}/ccsp/PsmSsp \
+    ${prefix}/ccsp/config/bbhm_def_cfg.xml \
+"
+
+FILES_${PN}-dbg = " \
+    ${prefix}/ccsp/.debug \
+    ${prefix}/src/debug \
+    ${bindir}/.debug \
+    ${libdir}/.debug \
+"
