@@ -1,8 +1,13 @@
-DEPENDS += " ccsp-common-library webconfig-framework"
+DEPENDS += " ccsp-common-library webconfig-framework libunpriv"
+
+LDFLAGS_append = " \
+        -lprivilege \
+       "
 
 CFLAGS += " -DCCSP_SUPPORT_ENABLED \
             -DENABLE_RDKB_SUPPORT \
             -DFEATURE_SUPPORT_WEBCONFIG \
+            -DDROP_ROOT_PRIV \
           "
                    
 require recipes-ccsp/ccsp/ccsp_common.inc
