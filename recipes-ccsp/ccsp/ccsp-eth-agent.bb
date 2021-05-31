@@ -66,4 +66,22 @@ do_install_append () {
     install -d ${D}${exec_prefix}/ccsp/ethagent
     install -m 644 ${S}/config/TR181-EthAgent.xml ${D}${exec_prefix}/ccsp/ethagent/TR181-EthAgent.xml
 }
+
+PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspEthAgent_gtest.bin', '', d)} \
+"
+
+FILES_${PN} =" \
+        ${libdir}/systemd \
+        ${bindir}/CcspEthAgent \
+"
+
 FILES_${PN} += " ${exec_prefix}/ccsp/ethagent"
+
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-CcspEthAgent', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="gtest"
+SKIP_MAIN_PKG="yes"
+DOWNLOAD_ON_DEMAND="yes"
