@@ -42,6 +42,8 @@ CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-confi
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 
+CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '-DFEATURE_RDKB_WAN_MANAGER', '', d)}"
+
 LDFLAGS_append = " \
     -ldbus-1 \
     -ltrower-base64 \
@@ -53,6 +55,9 @@ LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'safec dunfell', ' -ls
 #Adding new package "tdk-b-dl" which will be downloaded package only of tdk_rdm distro feature is enabled
 TDKB_DL_PACK:= "${@bb.utils.contains('DISTRO_FEATURES', 'tdk_rdm', '${PN}-dl', '', d)}"
 PACKAGE_BEFORE_PN += "${TDKB_DL_PACK}"
+
+ENABLE_WAN_MANAGER = "${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '--enable-rdkb_wan_manager', '--disable-rdkb_wan_manager', d)}"
+EXTRA_OECONF_append = "${ENABLE_WAN_MANAGER}"
 
 # Install all TDK scripts
 do_install_append () {
