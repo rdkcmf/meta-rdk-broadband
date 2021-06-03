@@ -27,6 +27,8 @@ S = "${WORKDIR}/git"
 
 inherit autotools systemd
 
+CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-unused-parameter "
+
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/pwrMgr
