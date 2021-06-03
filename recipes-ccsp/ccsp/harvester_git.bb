@@ -12,6 +12,10 @@ SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/generic/harvester;protocol=${CMF_GIT_
 SRCREV_harvester = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
+CFLAGS += " -Wall -Werror -Wextra -Wno-unused-parameter -Wno-pointer-sign -Wno-sign-compare "
+
+CFLAGS_append_dunfell = " -Wno-format-truncation "
+
 CFLAGS_append = " \
     -I${STAGING_INCDIR}/dbus-1.0 \
     -I${STAGING_LIBDIR}/dbus-1.0/include \
