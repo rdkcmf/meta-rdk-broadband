@@ -53,7 +53,7 @@ do_install_append () {
 PACKAGES += "${PN}-ccsp"
 INSANE_SKIP_${PN} += "ldflags libdir"
 
-FILES_${PN} += " \
+FILES_${PN} = " \
     ${bindir}/CcspAdvSecuritySsp \
     ${prefix}/ccsp/* \
     /usr/bin/CcspAdvSecuritySsp \
@@ -62,6 +62,8 @@ FILES_${PN} += " \
     ${prefix}/ccsp/advsec/advsec_log_fp_status.sh \
     ${prefix}/ccsp/advsec/advsec_cpu_mem_recovery.sh \
     ${prefix}/ccsp/advsec/advsec.sh \
+    ${libdir}/libdmlasecurity.so* \
+    /var/empty \
 "
 
 FILES_${PN}-dbg += " \
@@ -70,3 +72,15 @@ FILES_${PN}-dbg += " \
     ${bindir}/.debug \
     ${libdir}/.debug \
 "
+
+PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspAdvSecuritySsp_gtest.bin', '', d)} \
+"
+
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-CcspAdvSecuritySsp', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
+SKIP_MAIN_PKG="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
