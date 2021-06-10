@@ -5,24 +5,26 @@
 SUMMARY = "USP Pa component"
 DESCRIPTION = "Agent for USP protocol"
 DEPENDS = "openssl sqlite3 curl zlib ccsp-common-library"
-LICENSE = "BSD-3"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b4b2a405a0e92a1292adf5b60afb3a0b"
+LICENSE = "BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=b612eeb51efab2203cc9a982e9530c8a"
 
 require recipes-ccsp/ccsp/ccsp_common.inc
 
 
 # OBUSPA is the reference USP agent codebase
-OBUSPA_REL="3.0.0"
+OBUSPA_REL="4.0.0"
 SRC_URI = "https://github.com/BroadbandForum/obuspa/archive/v${OBUSPA_REL}-master.tar.gz;name=obuspa"
-SRC_URI[obuspa.md5sum] = "7ffdc4184198f3fb2535700010d3423f"
+SRC_URI[obuspa.md5sum] = "b1c7f781ba765c529a4c6f51d5406232"
 
 # USPPA is the RDK specializations
 SRC_URI += "git://github.com/rdkcentral/usp-pa-vendor-rdk;protocol=http;branch=main;name=usppa"
-SRCREV_usppa = "5c98036d5a0554ef5e73b26e70be6e9cf34cff2b"
+SRCREV_usppa = "7e669d33b056c75be11444e0062ed98f03c1ebbe"
 
 # Patches for OBUSPA
-SRC_URI += "file://patches/no_hardcoded_cflags.patch"
-SRC_URI += "file://patches/no_mqtt.patch"
+#SRC_URI += "file://patches/example.patch"
+
+# Configure options for OBUSPA
+EXTRA_OECONF += "--disable-mqtt"
 
 # Configuration files for target
 SRC_URI += "file://conf/usp_factory_reset.conf"
