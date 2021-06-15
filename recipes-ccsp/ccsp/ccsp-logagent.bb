@@ -53,4 +53,20 @@ do_install_append () {
     install -m 644 ${S}/scripts/msg_daemon.cfg ${D}${prefix}/ccsp/logagent/msg_daemon.cfg
 }
 
+PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/log_agent_gtest.bin', '', d)} \
+"
+
+FILES_${PN} = " \
+        ${bindir}/log_agent \
+"
+
 FILES_${PN} += "${prefix}/ccsp/logagent"
+
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-log_agent', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="gtest"
+SKIP_MAIN_PKG="yes"
+DOWNLOAD_ON_DEMAND="yes"
