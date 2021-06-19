@@ -60,11 +60,19 @@ do_install_append () {
 }
 
 PACKAGES += "${PN}-ccsp"
+PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspXdnsSsp_gtest.bin', '', d)} \
+"
+
+FILES_${PN} = "\
+    ${bindir}/CcspXdnsSsp \
+"
 
 FILES_${PN} += " \
     ${prefix}/ccsp/xdns \
-    ${libdir}/libdmlxdns.so.* \
-    ${bindir}/* \
+    ${libdir}/libdmlxdns.so* \
 "
 
 FILES_${PN}-dbg += " \
@@ -73,4 +81,9 @@ FILES_${PN}-dbg += " \
     ${bindir}/.debug \
     ${libdir}/.debug \
 "
-           
+
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-CcspXdnsSsp', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="gtest"
+SKIP_MAIN_PKG="yes"
+DOWNLOAD_ON_DEMAND="yes"
