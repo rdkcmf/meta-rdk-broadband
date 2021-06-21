@@ -165,6 +165,27 @@ do_install_append_qemux86 () {
 }
 
 PACKAGES += "${PN}-ccsp"
+PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspPandMSsp_gtest.bin', '', d)} \
+"
+
+FILES_${PN} = " \
+        ${bindir}/CcspPandMSsp \
+        /usr/ccsp/pam/TR181-USGv2.XML \
+        ${libdir}/libtr181.so* \
+        /etc/RebootCondition.sh \
+        /etc/revert_redirect.sh \
+        /etc/AutoReboot.sh \
+        /etc/rfcDefaults.json \
+        /etc/network_response.sh \
+        /etc/redirect_url.sh \
+        /etc/partners_defaults.json \
+        /etc/calc_random_time_to_reboot_dev.sh \
+        /etc/static_urls \
+        /etc/ScheduleAutoReboot.sh \
+"
 
 FILES_${PN}-ccsp = " \
     ${prefix}/ccsp/pam/CcspDmLib.cfg  \
@@ -197,4 +218,9 @@ FILES_${PN}-ccsp_append_qemux86 = " \
     ${prefix}/ccsp/pam/COSAXcalibur.XML \
 "
 
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-CcspPandMSsp', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="gtest"
+SKIP_MAIN_PKG="yes"
+DOWNLOAD_ON_DEMAND="yes"
 
