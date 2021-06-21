@@ -90,3 +90,21 @@ FILES_${PN}-dbg = " \
     ${bindir}/.debug \
     ${libdir}/.debug \
 "
+
+FILES_${PN} = "\
+    ${bindir}/CcspLMLite \
+    ${libdir}/liblmapi.so* \
+"
+
+PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspLMLite_gtest.bin', '', d)} \
+"
+
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-CcspLMLite', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="gtest"
+SKIP_MAIN_PKG="yes"
+DOWNLOAD_ON_DEMAND="yes"
+
