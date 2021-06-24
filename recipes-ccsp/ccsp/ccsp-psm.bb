@@ -65,6 +65,10 @@ do_install_append_qemuarm () {
     install -m 644 ${S}/config/bbhm_def_cfg_qemu.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
 }
 
+FILES_${PN} = " \
+    ${bindir}/PsmSsp \
+"
+
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN}-ccsp = " \
@@ -79,3 +83,15 @@ FILES_${PN}-dbg = " \
     ${bindir}/.debug \
     ${libdir}/.debug \
 "
+
+PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/PsmSsp_gtest.bin', '', d)} \
+"
+
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-PsmSsp', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="gtest"
+SKIP_MAIN_PKG="yes"
+DOWNLOAD_ON_DEMAND="yes"
