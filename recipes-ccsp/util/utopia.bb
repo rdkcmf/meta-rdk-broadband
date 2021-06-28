@@ -23,6 +23,7 @@ SRCREV_FORMAT = "Utopia"
 PV = "${RDK_RELEASE}"
 
 S = "${WORKDIR}/git"
+EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '--enable-gtestapp', '', d)}"
 
 inherit autotools useradd update-alternatives pkgconfig
 
@@ -85,6 +86,12 @@ do_install_append () {
     ln -sf /usr/bin/syscfg ${D}${bindir}/syscfg_check
 }
 
+FILES_${PN} = " \
+  ${sbindir}/* \
+  ${libdir}/* \
+  ${bindir}/* \
+  ${sysconfdir}/* \
+"
 
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system firewall"
@@ -120,3 +127,15 @@ ALTERNATIVE_TARGET[syslog-conf] = "/fss/gw/etc/syslog.conf.${BPN}"
 CONFFILES_${PN} = "/fss/gw/${sysconfdir}/syslog.conf.${BPN}"
 
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'telemetry2_0', ' telemetry', '', d)}"
+
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/Utopia_gtest.bin', '', d)} \
+"
+
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-Utopia', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
+SKIP_MAIN_PKG="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
