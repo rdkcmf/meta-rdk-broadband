@@ -34,6 +34,8 @@ CFLAGS += " \
     -D_GNU_SOURCE -D__USE_XOPEN \
     -I${STAGING_INCDIR}/dbus-1.0 \
     -I${STAGING_LIBDIR}/dbus-1.0/include \
+    -I${STAGING_INCDIR}/rbus \
+    -I${STAGING_INCDIR}/rtmessage \
     "
 
 CFLAGS += " -Wall -Werror -Wextra "
