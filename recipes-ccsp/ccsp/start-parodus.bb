@@ -22,7 +22,6 @@ S = "${WORKDIR}/git"
 
 inherit autotools pkgconfig
 DEPENDS_append = " hal-platform hal-cm openssl cpgc lxy "
-DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkssa', 'rdkssa', ' ', d)} "
 RDEPENDS_${PN} += " cjson hal-platform hal-cm utopia "
 
 LDFLAGS_append = " -lbreakpadwrapper -lhal_platform -lcm_mgnt -lsyscfg -lcjson -lsysevent -lutapi -lutctx "
