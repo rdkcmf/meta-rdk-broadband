@@ -74,6 +74,15 @@ do_install_append () {
     install -m 664 ${S}/config-atom/RadioInterfacesStatistics.avsc -t ${D}/usr/ccsp/harvester
     install -m 664 ${S}/config-atom/GatewayAccessPointNeighborScanReport.avsc -t ${D}/usr/ccsp/harvester
 }
+PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/harvester_gtest.bin', '', d)} \
+"
+FILES_${PN} = "\
+    ${bindir}/harvester \
+    ${libdir}/libHarvesterSsp.so* \
+"
 
 FILES_${PN} += " \
     ${exec_prefix}/ccsp/harvester/InterfaceDevicesWifi.avsc \
@@ -86,3 +95,9 @@ ERROR_QA_remove_morty = "la"
 
 # generating minidumps
 PACKAGECONFIG_append = " breakpad"
+
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-harvester', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
+SKIP_MAIN_PKG="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
