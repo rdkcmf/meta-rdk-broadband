@@ -8,6 +8,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 
 DEPENDS = "ccsp-common-library hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi telemetry"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'fwupgrade_manager', ' hal-fwupgrade', '',d)}"
+DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
 RDEPENDS_${PN}_append_dunfell = " bash"
 
@@ -27,10 +28,13 @@ CFLAGS_append = " \
     -I=${includedir}/dbus-1.0 \
     -I=${includedir}/../lib/dbus-1.0/include \
     "
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 
 LDFLAGS_append = " -ltelemetry_msgsender"
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'fwupgrade_manager', ' -lfw_upgrade', '', d)}"
 LDFLAGS_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'fwupgrade_manager', ' -lcm_mgnt', '', d)}"
+LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 
 do_install_append () {
     install -d ${D}${sysconfdir}

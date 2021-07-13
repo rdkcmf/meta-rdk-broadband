@@ -14,11 +14,11 @@ Signed-off-by: Jaga <Jagadheesan_Duraisamy@comcast.com>
  1 file changed, 15 insertions(+), 1 deletion(-)
 
 diff --git a/source-arm/TR-181/board_sbapi/cosa_users_apis.c b/source-arm/TR-181/board_sbapi/cosa_users_apis.c
-index 87ec0f95..be673d89 100644
+index 25352e53e..1d0f59e7b 100644
 --- a/source-arm/TR-181/board_sbapi/cosa_users_apis.c
 +++ b/source-arm/TR-181/board_sbapi/cosa_users_apis.c
-@@ -595,7 +595,11 @@ ANSC_STATUS
-         char cmp[128] = {'\0'};
+@@ -594,7 +594,11 @@ ANSC_STATUS
+         char *convertTo = NULL;
          char saltText[128] = {'\0'}, hashedmd[128] = {'\0'};
          int  iIndex = 0, Key_len = 0, salt_len = 0, hashedmd_len = 0;
 +#if (OPENSSL_VERSION_NUMBER < 0x10100000L)
@@ -29,7 +29,7 @@ index 87ec0f95..be673d89 100644
          errno_t safec_rc = -1;
  			
          safec_rc = strcpy_s(saltText, sizeof(saltText), SerialNumber);
-@@ -607,17 +611,28 @@ ANSC_STATUS
+@@ -606,10 +610,17 @@ ANSC_STATUS
          Key_len = strlen(pString);
  	
          salt_len = strlen(saltText);
@@ -44,10 +44,11 @@ index 87ec0f95..be673d89 100644
 +        HMAC_Update( pctx, (unsigned char *)saltText, salt_len);
 +        HMAC_Final(  pctx, (unsigned char *)hashedmd, (unsigned int *)&hashedmd_len );
 +#endif
-         convertTo = cmp;
+         convertTo = hashedpassword;
          for (iIndex = 0; iIndex < hashedmd_len; iIndex++) 
          {
-           sprintf(convertTo,"%02x", hashedmd[iIndex] & 0xff);
+@@ -621,7 +632,11 @@ ANSC_STATUS
+           }
            convertTo += 2;
          }
 +#if (OPENSSL_VERSION_NUMBER < 0x10100000L)
@@ -55,6 +56,6 @@ index 87ec0f95..be673d89 100644
 +#else
 +	HMAC_CTX_free(pctx);
 +#endif
-         AnscCopyString(hashedpassword,cmp);
          CcspTraceWarning(("%s, Returning success\n",__FUNCTION__));	
          return ANSC_STATUS_SUCCESS ;
+ 
