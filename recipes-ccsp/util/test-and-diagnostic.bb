@@ -61,6 +61,11 @@ do_install_append () {
     if [ ${HASTHERMAL} = "true" ]; then
     	install -m 755 ${S}/source/ThermalCtrl/check_fan.sh ${D}/usr/ccsp/tad/check_fan.sh
     fi
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'bci', 'true', 'false', d)}; then
+        if [ "${MACHINE_IMAGE_NAME}" = "CGA4332COM" ] || [ "${MACHINE_IMAGE_NAME}" = "CGA4131COM" ]; then
+            install -m 0755 ${S}/source/StaticInfo/log_staticIP_client_info.sh ${D}/usr/ccsp/tad/log_staticIP_client_info.sh
+        fi
+    fi
 }
 
 PACKAGES += "${PN}-ccsp"
