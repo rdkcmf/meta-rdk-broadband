@@ -3,7 +3,7 @@ SUMMARY = "TELCO VOICE Manager component"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library dbus rdk-logger utopia libparodus wrp-c trower-base64 nanomsg libunpriv"
+DEPENDS = "ccsp-common-library dbus rdk-logger utopia libparodus wrp-c trower-base64 nanomsg libunpriv avro-c"
 require ccsp_common.inc
 
 SRC_URI ="${RDKB_CCSP_ROOT_GIT}/RdkTelcoVoiceManager/generic;protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=TelcoVOICEManager"
@@ -33,6 +33,7 @@ CFLAGS_append = " \
     -I${STAGING_INCDIR}/public/include \
     -I${STAGING_INCDIR}/private/include \
     -I${STAGING_INCDIR}/public/include/linux \
+    -I${STAGING_INCDIR}/libparodus \
     "
 
 CFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_voice_manager_dmltr104_v2','-DFEATURE_RDKB_VOICE_DM_TR104_V2=ON','', d)}"
@@ -60,10 +61,12 @@ LDFLAGS_append = " \
 do_install_append () {
     # Config files and scripts
     install -d ${D}${exec_prefix}/rdk/voicemanager
+    install -d ${D}${exec_prefix}/ccsp/harvester/
     install -d ${D}${sysconfdir}/rdk/conf
     #JSON schema file
     install -d ${D}/${sysconfdir}/rdk/schemas
     ln -sf ${bindir}/telcovoice_manager ${D}${exec_prefix}/rdk/voicemanager/telcovoice_manager
+    install -m 644 ${S}/source/TR-181/integration_src.shared/VoiceDiagnostics.avsc ${D}/usr/ccsp/harvester/
 if [ ${ISRDKB_VOICE_DM_TR104_V2} = "true" ]; then
     install -m 644 ${S}/config/RdkTelcoVoiceManager_v2.xml ${D}/usr/rdk/voicemanager/RdkTelcoVoiceManager.xml
     install -m 644 ${S}/hal_schema/telcovoice_hal_schema_v2.json ${D}/${sysconfdir}/rdk/schemas/telcovoice_hal_schema.json
@@ -79,6 +82,7 @@ fi
 FILES_${PN} = " \
    ${exec_prefix}/rdk/voicemanager/telcovoice_manager \
    ${exec_prefix}/rdk/voicemanager/RdkTelcoVoiceManager.xml \
+   ${exec_prefix}/ccsp/harvester/VoiceDiagnostics.avsc \
    ${exec_prefix}/rdk/voicemanager/telcovoice_config_default.json \
    ${sysconfdir}/rdk/conf/telcovoice_manager_conf.json \
    ${sysconfdir}/rdk/schemas/telcovoice_hal_schema.json \
