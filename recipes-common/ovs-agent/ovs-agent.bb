@@ -54,13 +54,14 @@ do_install_append () {
 
 SYSTEMD_SERVICE_${PN} = "OvsAgent.path"
 
-PACKAGES += "${PN}-ptest"
+PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
-FILES_${PN}-ptest = " \
-    ${bindir}/OvsDbSocket_gtest.bin \
-    ${bindir}/OvsDbApi_gtest.bin \
-    ${bindir}/OvsAgentApi_gtest.bin \
-    ${bindir}/OvsAgent_gtest.bin \
+FILES_${PN}-gtest = " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/OvsDbSocket_gtest.bin', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/OvsDbApi_gtest.bin', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/OvsAgentApi_gtest.bin', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/OvsAgent_gtest.bin', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/JsonParser_gtest.bin', '', d)} \
 "
 
 FILES_${PN} = " \
@@ -75,6 +76,7 @@ FILES_${PN} = " \
     ${libdir}/libOvsAgentApi.so* \
     ${libdir}/libOvsAction.so* \
     ${libdir}/libOvsDbApi.so* \
+    ${libdir}/systemd \
 "
 
 FILES_${PN}-dbg = " \
@@ -83,3 +85,9 @@ FILES_${PN}-dbg = " \
     ${bindir}/.debug \
     ${libdir}/.debug \
 "
+
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-OvsAgent', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="gtest"
+SKIP_MAIN_PKG="yes"
+DOWNLOAD_ON_DEMAND="yes"
