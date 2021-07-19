@@ -65,6 +65,9 @@ CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_xdsl_ppp_manage
 #Add flags to support WiFi PSM DB
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'wifi-psm-db', '-DFEATURE_SUPPORT_WIFIDB', '', d)}"
 
+# Add flag to support HIGH split 
+CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'highsplit', '-D_CM_HIGHSPLIT_SUPPORTED_', '', d)}"
+
 FILES_${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP_${PN} += "dev-so"
