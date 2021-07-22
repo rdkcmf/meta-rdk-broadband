@@ -42,6 +42,17 @@ do_install_append () {
     install -m 644 ${S}/config/CcspEPON.cfg ${D}/usr/ccsp/epon/CcspEPON.cfg
 }
 
+PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspEPONAgentSsp_gtest.bin', '', d)} \
+"
+
+FILES_${PN} = " \
+        ${bindir}/CcspEPONAgentSsp \
+        ${libdir}/libepon_tr181.so* \
+"
+
 FILES_${PN} += " \
     /usr/ccsp/epon/ \
     /usr/ccsp/epon/CcspEPONAgentSsp \
@@ -55,3 +66,9 @@ FILES_${PN}-dbg = " \
     ${bindir}/.debug \
     ${libdir}/.debug \
 "
+
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-CcspEPONAgentSsp', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="gtest"
+SKIP_MAIN_PKG="yes"
+DOWNLOAD_ON_DEMAND="yes"
