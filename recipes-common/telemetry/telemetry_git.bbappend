@@ -1,7 +1,8 @@
-DEPENDS += " ccsp-common-library webconfig-framework libunpriv"
+DEPENDS += " ccsp-common-library webconfig-framework libunpriv dbus"
 
 LDFLAGS_append = " \
         -lprivilege \
+        -ldbus-1 \
        "
 
 CFLAGS += " -DCCSP_SUPPORT_ENABLED \
