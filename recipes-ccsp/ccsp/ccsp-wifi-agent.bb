@@ -2,7 +2,7 @@ SUMMARY = "CCSP WifiAgent component"
 HOMEPAGE = "http://github.com/belvedere-yocto/CcspWifiAgent"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=47e12197fc64426f4e59abc8ad391062"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=042d68aa6c083a648f58bb8d224a4d31"
 
 DEPENDS = "ccsp-common-library webconfig-framework hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi utopia cimplog libparodus avro-c telemetry libsyswrapper libev"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
