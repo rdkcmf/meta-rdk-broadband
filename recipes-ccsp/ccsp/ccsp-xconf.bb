@@ -34,6 +34,7 @@ LDFLAGS_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'fwupgrade_manager', 
 
 do_install_append () {
     install -d ${D}${sysconfdir}
+    install -m 755 ${S}/scripts/bundleUtils.sh ${D}${sysconfdir}
     install -m 755 ${S}/scripts/firmwareSched.sh ${D}${sysconfdir}
     install -m 755 ${S}/scripts/rdkfwupgrader_message.sh ${D}${sysconfdir}
 }
