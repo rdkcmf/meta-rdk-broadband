@@ -4,10 +4,9 @@ LICENSE = "CLOSED"
 #LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 #LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-
-#DEPENDS = "ccsp-common-library libsyswrapper utopia dbus rdk-logger"
-DEPENDS = "utopia rdk-logger telemetry jansson"
+DEPENDS = "ccsp-common-library utopia rdk-logger telemetry jansson"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
+require recipes-ccsp/ccsp/ccsp_common.inc
 
 SRC_URI = "${RDK_GENERIC_ROOT_GIT}/OvsAgent/generic;protocol=${RDK_GIT_PROTOCOL};branch=${RDK_GIT_BRANCH};name=ovs-agent"
 
@@ -21,6 +20,9 @@ LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-confi
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 
 CFLAGS_append = " \
+    -I${STAGING_INCDIR}/dbus-1.0 \
+    -I${STAGING_LIBDIR}/dbus-1.0/include \
+    -I${STAGING_INCDIR}/ccsp \
     -DENABLE_MESH_SOCKETS \
     "
 
@@ -69,6 +71,7 @@ FILES_${PN} = " \
     ${systemd_unitdir}/system/OvsAgent_ovsdb-server.service \
     ${systemd_unitdir}/system/OvsAgent.service \
     ${systemd_unitdir}/system/OvsAgent.path \
+    ${libdir}/libOvsAgentSsp.so* \
     ${libdir}/libOvsAgentApi.so* \
     ${libdir}/libOvsAction.so* \
     ${libdir}/libOvsDbApi.so* \
