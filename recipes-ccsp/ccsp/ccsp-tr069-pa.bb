@@ -45,9 +45,7 @@ CFLAGS_append = " \
 LDFLAGS_append = " \
     -ldbus-1 \
     -lm \
-    -lcjson \
     -ltelemetry_msgsender \
-    -lprivilege \
     "
 
 do_install_append () {
