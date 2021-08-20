@@ -12,9 +12,9 @@ require recipes-ccsp/ccsp/ccsp_common.inc
 
 
 # OBUSPA is the reference USP agent codebase
-OBUSPA_REL="4.0.0"
+OBUSPA_REL="4.1.0"
 SRC_URI = "https://github.com/BroadbandForum/obuspa/archive/v${OBUSPA_REL}-master.tar.gz;name=obuspa"
-SRC_URI[obuspa.md5sum] = "b1c7f781ba765c529a4c6f51d5406232"
+SRC_URI[obuspa.md5sum] = "b709d54f08aa528b73d435d71717f34f"
 
 # USPPA is the RDK specializations
 SRC_URI += "git://github.com/rdkcentral/usp-pa-vendor-rdk;protocol=http;branch=main;name=usppa"
