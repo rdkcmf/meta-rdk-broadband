@@ -51,6 +51,7 @@ do_install_append () {
     ln -sf /usr/bin/psmcli ${D}/usr/ccsp/psmcli
     install -d ${D}${includedir}/ccsp
     install -m 644 ${S}/source/TimeConv/time_conversion.h ${D}${includedir}/ccsp
+    install -m 644 ${S}/source/dhcp_client_utils/dhcp_client_utils.h ${D}${includedir}/ccsp
     install -m 755 ${S}/source/bridge_utils/scripts/migration_to_psm.sh ${D}/etc/
 }
 
@@ -64,6 +65,7 @@ FILES_${PN}-gtest = "\
 
 FILES_${PN} = "\
     ${libdir}/libtime_conversion.so* \
+    ${libdir}/libdhcp_client_utils.so* \
     ${bindir}/parcon \
     ${bindir}/psmcli \
     ${bindir}/LTime \
