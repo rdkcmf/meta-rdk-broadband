@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 
-DEPENDS = "ccsp-common-library dbus utopia libunpriv"
+DEPENDS = "ccsp-common-library dbus rbus utopia libunpriv"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
@@ -39,11 +39,13 @@ CFLAGS_append = " \
     -I=${includedir}/dbus-1.0 \
     -I=${libdir}/dbus-1.0/include \
     -I=${includedir}/ccsp \
+    -I=${includedir}/rbus \
     -I${STAGING_INCDIR}/syscfg \
     "
 
 LDFLAGS_append = " \
     -ldbus-1 \
+    -lrbus \
     "
 
 do_install_append () {
