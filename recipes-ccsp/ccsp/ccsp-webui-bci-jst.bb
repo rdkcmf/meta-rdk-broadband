@@ -2,7 +2,7 @@ SUMMARY = "CCSP WebUI component"
 HOMEPAGE = "http://github.com/ccsp-yocto/webui"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://../../../LICENSE;md5=0ef5cb68a38cd4d4c9f9d350c50f68f8"
+LIC_FILES_CHKSUM = "file://${THISDIR}/../../LICENSE;md5=5bfad6e034e497ee148eec56e175c6e8"
 
 DEPENDS = "ccsp-common-library sso"
 require ccsp_common.inc
@@ -14,7 +14,6 @@ SRC_URI = "\
 FILESEXTRAPATHS_prepend := "${THISDIR}/ccsp-webui-bci:"
 
 SRC_URI_append = " \
-                 file://LICENSE \
                  file://ajax_maintenance_window_conf.jst \
                  file://bci_maintenance_window_jst.patch;apply=no \
                  "
