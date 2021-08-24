@@ -1,8 +1,7 @@
 SUMMARY = "Ovs Agent"
-LICENSE = "CLOSED"
-#LICENSE = "Apache-2.0"
-#LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
-#LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
+
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c69ddb4023dccc5f90337c20fd9408f2"
 
 DEPENDS = "ccsp-common-library utopia rdk-logger telemetry jansson"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
