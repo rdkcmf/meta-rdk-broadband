@@ -3,7 +3,7 @@ SUMMARY = "RDK LED Manager component"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library rdk-logger utopia hal-platform hal-ledmanager"
+DEPENDS = "ccsp-common-library rdk-logger utopia hal-platform hal-ledmanager libunpriv"
 
 require ccsp_common.inc
 
@@ -26,6 +26,8 @@ CFLAGS_append = " \
     -I ${STAGING_INCDIR}/syscfg \
     -I ${STAGING_INCDIR}/sysevent \
     "
+
+LDFLAGS += " -lprivilege"
 
 LDFLAGS_append_dunfell = " -ldbus-1"
 
