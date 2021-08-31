@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/belvedere-yocto/CcspWifiAgent"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=042d68aa6c083a648f58bb8d224a4d31"
 
-DEPENDS = "ccsp-common-library webconfig-framework hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi utopia cimplog libparodus avro-c telemetry libsyswrapper libev"
+DEPENDS = "ccsp-common-library webconfig-framework hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi utopia libparodus avro-c telemetry libsyswrapper libev"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
@@ -42,7 +42,6 @@ CFLAGS_append = " \
     -I${STAGING_INCDIR}/dbus-1.0 \
     -I${STAGING_LIBDIR}/dbus-1.0/include \
     -I${STAGING_INCDIR}/ccsp \
-    -I${STAGING_INCDIR}/cimplog \
     -I${STAGING_INCDIR}/libparodus \
 "
 
@@ -50,7 +49,6 @@ CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'meshwifi', '-DENABLE_
 
 LDFLAGS_append = " \
     -ldbus-1 \
-    -lcimplog \
     -llibparodus \
     -ltelemetry_msgsender \
 "

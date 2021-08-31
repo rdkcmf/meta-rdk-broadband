@@ -4,7 +4,7 @@ SECTION = "console/utils"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library dbus utopia hal-ethsw hal-platform curl ccsp-lm-lite cimplog libunpriv"
+DEPENDS = "ccsp-common-library dbus utopia hal-ethsw hal-platform curl ccsp-lm-lite libunpriv"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
 require ccsp_common.inc
@@ -41,7 +41,6 @@ CFLAGS_append = " \
     -I${STAGING_INCDIR}/utctx \
     -I${STAGING_INCDIR}/ulog \
     -I${STAGING_INCDIR}/syscfg \
-    -I${STAGING_INCDIR}/cimplog \
     "
 
 LDFLAGS_append = " \
@@ -49,7 +48,6 @@ LDFLAGS_append = " \
     -ldbus-1 \
     -lutctx \
     -lutapi \
-    -lcimplog \
     -lrt \
     -lprivilege \
     "

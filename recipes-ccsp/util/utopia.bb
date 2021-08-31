@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0 & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=baa21dec03307f641a150889224a157f"
 
 
-DEPENDS = "ccsp-common-library hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi zlib dbus libnetfilter-queue libupnp cjson halinterface cimplog libevent libsyswrapper"
+DEPENDS = "ccsp-common-library hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi zlib dbus libnetfilter-queue libupnp cjson halinterface libevent libsyswrapper"
 DEPENDS_append_libc-musl = " libtirpc"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', ' nanomsg ', ' ', d)}"
 
@@ -37,7 +37,6 @@ CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-sign-compare -Wno-depre
 CFLAGS += " \
     -I${STAGING_INCDIR}/ccsp \
     -DCONFIG_BUILD_TRIGGER \
-    -I${STAGING_INCDIR}/cimplog \
     "
 
 CFLAGS_append_dunfell = " -I${STAGING_INCDIR}/tirpc -Wno-cast-function-type -Wno-address-of-packed-member "
@@ -51,7 +50,6 @@ LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '
 
 CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
 LDFLAGS_append_libc-musl = " -ltirpc"
-LDFLAGS_append = " -lcimplog"
 
 LDFLAGS_append_dunfell = " -ltirpc -lrt"
 
