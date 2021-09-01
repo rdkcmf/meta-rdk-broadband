@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/belvedere-yocto/CcspCr"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library dbus telemetry utopia libunpriv"
+DEPENDS = "ccsp-common-library dbus telemetry utopia libunpriv rbus libxml2"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 
 require ccsp_common.inc
@@ -31,9 +31,12 @@ CFLAGS_append = " \
     -I${STAGING_INCDIR}/utapi \
     -I${STAGING_INCDIR}/utctx \
     -I${STAGING_INCDIR}/ulog \
+    -I${STAGING_INCDIR}/rbus \
+    -I${STAGING_INCDIR}/rtmessage \
+    -I${STAGING_INCDIR}/libxml2 \
     "
 
-LDFLAGS += "-ldbus-1 -ltelemetry_msgsender -lprivilege -lutapi -lutctx -lsyscfg"
+LDFLAGS += "-ldbus-1 -ltelemetry_msgsender -lprivilege -lutapi -lutctx -lsyscfg -lrtMessage -lrbus-core -lrbus -lcjson -lmsgpackc -lxml2"
 
 do_install_append () {
     # Config files and scripts
