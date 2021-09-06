@@ -26,7 +26,6 @@ SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/CcspPandM;protocol=${
 
 #SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'file://0001-disable-fwupgrade-dm.patch', '', d)}"
 
-SRC_URI_append_dunfell = " file://0001-openssl-1.1.x-compatibility-in-HMAC-functions.patch"
 #SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'file://0002-disable-dhcp-clients-tr181-dml-in-PandM.patch', '', d)}"
 #SRC_URI_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'file://0003-disable-ppp-tr181-dml-in-PandM.patch', '', d)}"
 

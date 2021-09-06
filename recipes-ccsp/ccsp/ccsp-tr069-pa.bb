@@ -11,7 +11,6 @@ require ccsp_common.inc
 
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/CcspTr069Pa;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=CcspTr069Pa"
 
-SRC_URI_append_dunfell = " file://0001-openssl-1.1.x-compatibility.patch"
 
 SRCREV_CcspTr069Pa = "${AUTOREV}"
 SRCREV_FORMAT = "CcspTr069Pa"
