@@ -51,7 +51,6 @@ LDFLAGS_append = " \
     -lrt \
     -lprivilege \
     "
-LDFLAGS_append_dunfell = " -lsyscfg"
 do_compile_prepend () {
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'true', 'false', d)}; then
     		sed -i '2i <?define FEATURE_RDKB_WAN_MANAGER=True?>' ${S}/config/TR181-EthAgent.xml
