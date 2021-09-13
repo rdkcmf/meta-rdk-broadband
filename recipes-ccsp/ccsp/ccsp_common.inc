@@ -28,6 +28,7 @@ CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'meshwifi', '-DFEATUR
 
 # Add flags to support webconfig if the feature is available.
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig', '-DFEATURE_SUPPORT_WEBCONFIG', '', d)}"
+CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_bin', '-DFEATURE_SUPPORT_WEBCONFIG', '', d)}"
 
 # Add flags to support Interworking and passpoint if the feature is available.
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'interworking', '-DFEATURE_SUPPORT_INTERWORKING', '', d)}"

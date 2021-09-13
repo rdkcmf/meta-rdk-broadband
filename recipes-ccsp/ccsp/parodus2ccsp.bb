@@ -13,7 +13,7 @@ RDEPENDS_${PN}_append = "${@bb.utils.contains("DISTRO_FEATURES", "webconfig_phas
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 
-SRCREV = "${@bb.utils.contains("DISTRO_FEATURES", "webconfig_phase1", "d26d16eb4a85348404259178a48bfcdc49830463", "f67c9741b682bc8a4984df7d6fbca0f45cfb7fc7", d)}"
+SRCREV = "${@bb.utils.contains("DISTRO_FEATURES", "webconfig_phase1", "d26d16eb4a85348404259178a48bfcdc49830463", "1e97a5e5552b716552711339fba675a380c95ff1", d)}"
 
 do_configure_prepend () {
     (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/source/arch/intel_usg/boards/rdkb_atom/config/comcast/WebpaAgent.xml ${S}/source/broadband/dm_pack_datamodel.c)
@@ -52,6 +52,9 @@ CFLAGS_append = " \
 	"
 
 CFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "webconfig", "-I${STAGING_INCDIR}/webcfg ", " ", d)}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_bin', '-DWEBCONFIG_BIN_SUPPORT', '', d)}"
+
+CFLAGS_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_bin', ' -DFEATURE_SUPPORT_WEBCONFIG ', '', d)}"
 
 inherit pkgconfig cmake
 EXTRA_OECMAKE = "-DBUILD_TESTING=OFF -DBUILD_YOCTO=true"
@@ -61,8 +64,9 @@ EXTRA_OECMAKE += " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_phase1', '
 
 SRC_URI_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig', 'file://Web_config_XML.patch', '', d)}"
 SRC_URI_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_phase1', 'file://Web_config_Phase1_XML.patch', '', d)}"
-SRC_URI_append += " file://webconfig_metadata.json "
-SRC_URI_append += " file://metadata_parser.py "
+SRC_URI_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_bin', 'file://Webpa_Connected_Client_Notify_XML.patch', '', d)}"
+SRC_URI_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig', 'file://webconfig_metadata.json', ' ', d)}"
+SRC_URI_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig', 'file://metadata_parser.py ', ' ', d)}"
 
 # generating minidumps
 PACKAGECONFIG_append = " breakpad"
