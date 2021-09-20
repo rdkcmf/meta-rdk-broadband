@@ -176,7 +176,7 @@
                    }
                  ]
                },
-               {
+	       {
                  "group_id": 12,
                  "subdocs": [
                    {
@@ -186,9 +186,20 @@
                      "version": "1.0"
                    }
                  ]
+               },
+		{
+                 "group_id": 13,
+                 "subdocs": [
+                   {
+                     "name": "voiceservice",
+                     "bitposition": 1,
+                     "support": false,
+                     "version": "1.0"
+                   }
+                 ]
                }
              ],
-    "xb6" : [
+    "arrisxb6" : [
               {
                  "group_id": 1,
 	             "subdocs": [
@@ -375,6 +386,217 @@
                      "version": "1.0"
                    }
                  ]
+               },
+		{
+                 "group_id": 13,
+	             "subdocs": [
+                               {
+                                  "name": "voiceservice",
+                                  "bitposition": 1,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               }
+             ],
+	"tchxb6" : [
+              {
+                 "group_id": 1,
+	             "subdocs": [
+                               {
+                                  "name": "portforwarding",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "wan",
+                                  "bitposition": 2,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "lan",
+                                  "bitposition": 3,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "macbinding",
+                                  "bitposition": 4,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "hotspot",
+                                  "bitposition": 5,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "bridge",
+                                  "bitposition": 6,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 2,
+	             "subdocs": [
+                               {
+                                  "name": "privatessid",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "homessid",
+                                  "bitposition": 2,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "radio",
+                                  "bitposition": 3,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 3,
+	             "subdocs": [
+                               {
+                                  "name": "moca",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 4,
+	             "subdocs": [
+                               {
+                                  "name": "xdns",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 5,
+	             "subdocs": [
+                               {
+                                  "name": "advsecurity",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 6,
+	             "subdocs": [
+                               {
+                                  "name": "mesh",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 7,
+	             "subdocs": [
+                               {
+                                  "name": "aker",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 8,
+	             "subdocs": [
+                               {
+                                  "name": "telemetry",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0",
+                                  "secondary_doc": true
+                               }
+                            ]
+               },
+               {
+                 "group_id": 9,
+	             "subdocs": [
+                               {
+                                  "name": "trafficreport",
+                                  "bitposition": 1,
+                                  "support": false,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "statusreport",
+                                  "bitposition": 2,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 10,
+	             "subdocs": [
+                               {
+                                  "name": "radioreport",
+                                  "bitposition": 1,
+                                  "support": false,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "interfacereport",
+                                  "bitposition": 2,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 11,
+                 "subdocs": [
+                   {
+                     "name": "telcovoip",
+                     "bitposition": 1,
+                     "support": false,
+                     "version": "1.0"
+                   }
+                 ]
+               },
+               {
+                 "group_id": 12,
+                 "subdocs": [
+                   {
+                     "name": "wanmanager",
+                     "bitposition": 1,
+                     "support": false,
+                     "version": "1.0"
+                   }
+                 ]
+               },
+	       {
+                 "group_id": 13,
+	             "subdocs": [
+                               {
+                                  "name": "voiceservice",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
                }
              ],
     "xf3" : [
@@ -554,7 +776,7 @@
                    }
                  ]
                },
-               {
+	       {
                  "group_id": 12,
                  "subdocs": [
                    {
@@ -564,9 +786,20 @@
                      "version": "1.0"
                    }
                  ]
+               },
+               {
+                 "group_id": 13,
+                 "subdocs": [
+                   {
+                     "name": "voiceservice",
+                     "bitposition": 1,
+                     "support": false,
+                     "version": "1.0"
+                   }
+                 ]
                }
              ],
-    "xb7" : [
+    "arrisxb7" : [
               {
                  "group_id": 1,
 	             "subdocs": [
@@ -753,6 +986,217 @@
                      "version": "1.0"
                    }
                  ]
+               },
+	       {
+                 "group_id": 13,
+	             "subdocs": [
+                               {
+                                  "name": "voiceservice",
+                                  "bitposition": 1,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               }
+             ],
+	"tchxb7" : [
+              {
+                 "group_id": 1,
+	             "subdocs": [
+                               {
+                                  "name": "portforwarding",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "wan",
+                                  "bitposition": 2,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "lan",
+                                  "bitposition": 3,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "macbinding",
+                                  "bitposition": 4,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "hotspot",
+                                  "bitposition": 5,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "bridge",
+                                  "bitposition": 6,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 2,
+	             "subdocs": [
+                               {
+                                  "name": "privatessid",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "homessid",
+                                  "bitposition": 2,
+                                  "support": true,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "radio",
+                                  "bitposition": 3,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 3,
+	             "subdocs": [
+                               {
+                                  "name": "moca",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 4,
+	             "subdocs": [
+                               {
+                                  "name": "xdns",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 5,
+	             "subdocs": [
+                               {
+                                  "name": "advsecurity",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 6,
+	             "subdocs": [
+                               {
+                                  "name": "mesh",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 7,
+	             "subdocs": [
+                               {
+                                  "name": "aker",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 8,
+	             "subdocs": [
+                               {
+                                  "name": "telemetry",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0",
+                                  "secondary_doc": true
+                               }
+                            ]
+               },
+               {
+                 "group_id": 9,
+	             "subdocs": [
+                               {
+                                  "name": "trafficreport",
+                                  "bitposition": 1,
+                                  "support": false,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "statusreport",
+                                  "bitposition": 2,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 10,
+	             "subdocs": [
+                               {
+                                  "name": "radioreport",
+                                  "bitposition": 1,
+                                  "support": false,
+                                  "version": "1.0"
+                               },
+                               {
+                                  "name": "interfacereport",
+                                  "bitposition": 2,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+               {
+                 "group_id": 11,
+                 "subdocs": [
+                   {
+                     "name": "telcovoip",
+                     "bitposition": 1,
+                     "support": false,
+                     "version": "1.0"
+                   }
+                 ]
+               },
+               {
+                 "group_id": 12,
+                 "subdocs": [
+                   {
+                     "name": "wanmanager",
+                     "bitposition": 1,
+                     "support": false,
+                     "version": "1.0"
+                   }
+                 ]
+               },
+	       {
+                 "group_id": 13,
+	             "subdocs": [
+                               {
+                                  "name": "voiceservice",
+                                  "bitposition": 1,
+                                  "support": true,
+                                  "version": "1.0"
+                               }
+                            ]
                }
              ],
     "xb8" : [
@@ -932,11 +1376,22 @@
                    }
                  ]
                },
-               {
+	       {
                  "group_id": 12,
                  "subdocs": [
                    {
                      "name": "wanmanager",
+                     "bitposition": 1,
+                     "support": false,
+                     "version": "1.0"
+                   }
+                 ]
+               },
+               {
+                 "group_id": 13,
+                 "subdocs": [
+                   {
+                     "name": "voiceservice",
                      "bitposition": 1,
                      "support": false,
                      "version": "1.0"
@@ -1121,11 +1576,22 @@
                    }
                  ]
                },
-               {
+	       {
                  "group_id": 12,
                  "subdocs": [
                    {
                      "name": "wanmanager",
+                     "bitposition": 1,
+                     "support": false,
+                     "version": "1.0"
+                   }
+                 ]
+               },
+		{
+                 "group_id": 13,
+                 "subdocs": [
+                   {
+                     "name": "voiceservice",
                      "bitposition": 1,
                      "support": false,
                      "version": "1.0"
@@ -1320,6 +1786,17 @@
              "version": "1.0"
            }
          ]
+       },
+       {
+         "group_id": 13,
+         "subdocs": [
+           {
+             "name": "voiceservice",
+             "bitposition": 1,
+             "support": false,
+             "version": "1.0"
+           }
+         ]
        }
      ],
      "sr300" : [
@@ -1506,6 +1983,17 @@
              "name": "wanmanager",
              "bitposition": 1,
              "support": true,
+             "version": "1.0"
+           }
+         ]
+       },
+	{
+         "group_id": 13,
+         "subdocs": [
+           {
+             "name": "voiceservice",
+             "bitposition": 1,
+             "support": false,
              "version": "1.0"
            }
          ]
