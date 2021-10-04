@@ -15,7 +15,7 @@ SRC_URI_append_dunfell = " file://0001-openssl-1.1.x-compatibility.patch"
 
 SRCREV_CcspTr069Pa = "${AUTOREV}"
 SRCREV_FORMAT = "CcspTr069Pa"
-PV = "${RDK_RELEASE}+git${SRCPV}"
+PV = "${RDK_RELEASE}"
 
 S = "${WORKDIR}/git"
 
