@@ -15,7 +15,7 @@ SRCREV_notify-comp = "${AUTOREV}"
 SRCREV_FORMAT = "notify-comp"
 
 S = "${WORKDIR}/git/notify_comp"
-inherit autotools pkgconfig comcast-breakpad coverity pythonnative
+inherit autotools pkgconfig breakpad-wrapper coverity pythonnative
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
 

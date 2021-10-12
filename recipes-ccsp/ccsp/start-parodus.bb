@@ -8,7 +8,7 @@ DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " 
 require recipes-ccsp/ccsp/ccsp_common.inc
 
 # generating minidumps symbols
-inherit comcast-breakpad
+inherit breakpad-wrapper
 BREAKPAD_BIN_append = " parodusStart"
 
 CFLAGS += " -Wall -Werror -Wextra "
