@@ -70,11 +70,27 @@ do_install_append () {
     install -m 0644 ${S}/source/utapi/lib/*.h ${D}${includedir}/utapi/
     install -d ${D}${sysconfdir}/cron
 
+    install -d ${D}${sysconfdir}/cron/cron.everyminute
     install -d ${D}${sysconfdir}/cron/cron.every5minute
+    install -d ${D}${sysconfdir}/cron/cron.every10minute
+    install -d ${D}${sysconfdir}/cron/cron.hourly
+    install -d ${D}${sysconfdir}/cron/cron.daily
+    install -d ${D}${sysconfdir}/cron/cron.weekly
+    install -d ${D}${sysconfdir}/cron/cron.monthly
     install -m 444 ${WORKDIR}/udhcpc.vendor_specific  ${D}${sysconfdir}/udhcpc.vendor_specific
     install -m 755 ${WORKDIR}/udhcpc.script ${D}${sysconfdir}/
     install -m 755 ${WORKDIR}/dhcpswitch.sh ${D}${sysconfdir}/
+
+    install -m 0644 ${S}/source/scripts/init/service.d/cron.allow ${D}${sysconfdir}/cron/
+    install -m 755 ${S}/source/scripts/init/service.d/ddns_daily.sh ${D}${sysconfdir}/cron/cron.daily/
+    install -m 755 ${S}/source/scripts/init/service.d/mta_overcurrent_status_daily.sh ${D}${sysconfdir}/cron/cron.daily/
+    install -m 755 ${S}/source/scripts/init/service.d/remove_max_cpu_usage_file.sh ${D}${sysconfdir}/cron/cron.daily/
+    install -m 755 ${S}/source/scripts/init/service.d/log_hourly.sh ${D}${sysconfdir}/cron/cron.hourly/
+    install -m 755 ${S}/source/scripts/init/service.d/ntp_hourly.sh ${D}${sysconfdir}/cron/cron.hourly/
+    install -m 755 ${S}/source/scripts/init/service.d/log_every10minute.sh ${D}${sysconfdir}/cron/cron.every10minute/
+    install -m 755 ${S}/source/scripts/init/service.d/pmon_every5minute.sh ${D}${sysconfdir}/cron/cron.every5minute/
     install -m 755 ${S}/source/scripts/init/service.d/logrotate.sh ${D}${sysconfdir}/cron/cron.every5minute/
+    install -m 755 ${S}/source/scripts/init/service.d/sysevent_tick.sh ${D}${sysconfdir}/cron/cron.everyminute/
 
     install -d ${D}${includedir}/ccsp
     install -m 644 ${S}/source/util/print_uptime/print_uptime.h ${D}${includedir}/ccsp
