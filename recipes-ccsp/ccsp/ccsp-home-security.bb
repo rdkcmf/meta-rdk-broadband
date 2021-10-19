@@ -18,8 +18,6 @@ inherit autotools
 
 CFLAGS += " -Wall -Werror -Wextra "
 
-CFLAGS_append_dunfell = " -Wno-format-truncation -Wno-format-overflow "
-
 CFLAGS_append = " \
     -I=${includedir}/dbus-1.0 \
     -I=${libdir}/dbus-1.0/include \
