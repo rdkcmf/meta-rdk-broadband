@@ -2,7 +2,7 @@ SUMMARY = "CCSP Power Manager"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library utopia hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi dbus rdk-logger"
+DEPENDS = "ccsp-common-library utopia hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi dbus rdk-logger breakpad breakpad-wrapper"
 
 require recipes-ccsp/ccsp/ccsp_common.inc
 
@@ -27,7 +27,12 @@ S = "${WORKDIR}/git"
 
 inherit autotools systemd
 
-CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-unused-parameter "
+# generating minidumps symbols
+inherit breakpad-wrapper
+BREAKPAD_BIN_append = " rdkbPowerMgr"
+
+CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-unused-parameter -DINCLUDE_BREAKPAD "
+LDFLAGS += "-lbreakpadwrapper -lpthread -lstdc++"
 
 do_install_append () {
     # Config files and scripts
@@ -69,3 +74,6 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
 SKIP_MAIN_PKG="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
 DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+
+# generating minidumps
+PACKAGECONFIG_append = " breakpad"

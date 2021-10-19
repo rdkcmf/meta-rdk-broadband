@@ -30,6 +30,13 @@ CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC
 
 CFLAGS += " -Wall -Werror -Wextra "
 
+# generating minidumps symbols
+inherit breakpad-wrapper
+DEPENDS += "breakpad breakpad-wrapper"
+BREAKPAD_BIN_append = " psmcli"
+
+LDFLAGS += "-lbreakpadwrapper -lpthread -lstdc++"
+
 CFLAGS_append = " \
     -I${STAGING_INCDIR}/dbus-1.0 \
     -I${STAGING_LIBDIR}/dbus-1.0/include \
@@ -87,6 +94,8 @@ FILES_${PN}-dbg = " \
     ${bindir}/.debug \
     ${libdir}/.debug \
 "
+# generating minidumps
+PACKAGECONFIG_append = " breakpad"
 
 DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-CcspMisc', '', d)}"
 inherit comcast-package-deploy

@@ -36,6 +36,14 @@ LDFLAGS += "-ldbus-1 -ltelemetry_msgsender"
 CFLAGS += " -Wall -Werror -Wextra "
 CPPLAGS += " -Wall -Werror -Wextra "
 
+# generating minidumps symbols
+inherit breakpad-wrapper
+DEPENDS += "breakpad breakpad-wrapper"
+BREAKPAD_BIN_append = " dmcli"
+
+LDFLAGS += "-lbreakpadwrapper -lpthread -lstdc++"
+CFLAGS += " -DINCLUDE_BREAKPAD"
+
 do_compile_prepend () {
     (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/source/MsgBusTestServer/config/MsgBusTest.XML ${S}/source/MsgBusTestServer/dm_pack_datamodel.c)
 }
@@ -121,6 +129,9 @@ FILES_${PN}-dbg = " \
     ${bindir}/.debug \
     ${libdir}/.debug \
 "
+
+# generating minidumps
+PACKAGECONFIG_append = " breakpad"
 
 DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-Dmcli', '', d)}"
 inherit comcast-package-deploy
