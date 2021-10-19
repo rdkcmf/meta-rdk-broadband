@@ -25,8 +25,6 @@ inherit autotools systemd coverity
 
 CFLAGS += " -Wall -Werror -Wextra -Wno-unused-parameter -Wno-unused-but-set-parameter -Wno-pointer-sign -Wno-sign-compare -Wno-implicit-function-declaration "
 
-CFLAGS_append_dunfell = " -Wno-format-overflow -Wno-write-strings "
-
 CFLAGS_append = " \
     -I=${includedir}/dbus-1.0 \
     -I=${libdir}/dbus-1.0/include \
