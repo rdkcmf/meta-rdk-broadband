@@ -13,25 +13,25 @@ Index: git/src/privilege.c
  #include "privilege.h"
 +#include "parodus_log.h"
 +#include "cap.h"
-+#include "syscfg/syscfg.h"
 +static cap_user appcaps;
  
  void drop_root_privilege()
  {
 -
-+  char buf[8] = {'\0'};
 +  appcaps.caps = NULL;
 +  appcaps.user_name = NULL;
-+  syscfg_init();
-+  syscfg_get( NULL, "NonRootSupport", buf, sizeof(buf));
-+  if( buf != NULL )
++  bool ret = false;
++  ret = isBlocklisted();
++  if(ret)
 +  {
-+      if (strncmp(buf, "true", strlen("true")) == 0) {
-+          init_capability();
-+          drop_root_caps(&appcaps);
-+          update_process_caps(&appcaps);
-+          read_capability(&appcaps);
-+      }
-+      ParodusInfo("RFC Setting for NonRootSupport is: %s\n",buf);
++       ParodusInfo("NonRoot feature is disabled\n");
++  }
++  else
++  {
++       ParodusInfo("NonRoot feature is enabled, dropping root privileges for parodus process\n");
++       init_capability();
++       drop_root_caps(&appcaps);
++       update_process_caps(&appcaps);
++       read_capability(&appcaps);
 +  }
  }
