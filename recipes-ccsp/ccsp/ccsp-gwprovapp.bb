@@ -39,7 +39,6 @@ LDFLAGS += "-pthread -ltelemetry_msgsender"
 do_install_append () {
     # Config files and scripts
     install -d ${D}/${includedir}
-    install -m 644 ${S}/source/include/Tr69_Tlv.h -t ${D}/${includedir}
 }
 
 
