@@ -109,11 +109,6 @@ do_install_append_broadband() {
 
 FILES_${PN}_append += "${systemd_unitdir}/system/CcspMtaAgentSsp.service.d/CcspMtaAgentSsp.conf"
 
-FILES_${PN} = " \
-  ${sysconfdir}/ccsp/cosa \
-  ${libdir}/libccsp_common.so* \
-"
-
 PACKAGES =+ "ccsp-common-startup"
 
 
@@ -149,7 +144,7 @@ BBCLASSEXTEND = "native"
 
 DEPENDS_remove_class-native = " safec-native"
 
-PACKAGES += " ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ " ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspCommonLibrary_gtest.bin', '', d)} \
