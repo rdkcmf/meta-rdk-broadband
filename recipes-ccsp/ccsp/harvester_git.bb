@@ -31,7 +31,7 @@ S = "${WORKDIR}/git"
 inherit autotools
 
 # generating minidumps symbols
-inherit comcast-breakpad
+inherit breakpad-wrapper
 DEPENDS += "breakpad breakpad-wrapper"
 BREAKPAD_BIN_append = " harvester"
 

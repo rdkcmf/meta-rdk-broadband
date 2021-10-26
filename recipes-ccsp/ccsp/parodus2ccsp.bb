@@ -29,7 +29,7 @@ S = "${WORKDIR}/git"
 require ccsp_common.inc
 
 # generating minidumps symbols
-inherit comcast-breakpad pythonnative
+inherit breakpad-wrapper pythonnative
 BREAKPAD_BIN_append = " webpa"
 
 LDFLAGS += "-lpthread -lcjson -lmsgpackc -ltrower-base64 -lnanomsg -lcimplog -lwdmp-c -lwrp-c -llibparodus -lm -luuid -lstdc++ -lbreakpadwrapper -lsysevent -lutapi -lutctx -lsyscfg -lprivilege"
