@@ -31,6 +31,8 @@ DEPENDS_append = "${@bb.utils.contains("DISTRO_FEATURES", "seshat", " libseshat 
 CFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "seshat", " -DENABLE_SESHAT ", " ", d)}"
 LDFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "seshat", " -llibseshat ", " ", d)}"
 
+EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '--enable-gtestapp', '', d)}"
+
 LDFLAGS += " -lprivilege"
 
 CFLAGS_append = "\
@@ -54,8 +56,14 @@ do_install_append () {
     install -m 644 ${S}/hal_schema/xdsl_hal_schema.json ${D}/${sysconfdir}/rdk/schemas
 }
 
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/RdkXdslManager_gtest.bin', '', d)} \
+"
 
 FILES_${PN} = " \
+   ${libdir}/systemd \
    ${bindir}/xdslmanager \
    ${exec_prefix}/ccsp/harvester/XdslReport.avsc \
    ${prefix}/rdk/xdslmanager/RdkXdslManager.xml \
@@ -69,3 +77,9 @@ FILES_${PN}-dbg = " \
     ${bindir}/.debug \
     ${libdir}/.debug \
 "
+
+DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-rdkxdslmanager', '', d)}"
+inherit comcast-package-deploy
+CUSTOM_PKG_EXTNS="gtest"
+SKIP_MAIN_PKG="yes"
+DOWNLOAD_ON_DEMAND="yes"
