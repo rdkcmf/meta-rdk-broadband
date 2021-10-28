@@ -53,7 +53,7 @@ do_install_append () {
 
 SYSTEMD_SERVICE_${PN} = "OvsAgent.path"
 
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/OvsDbSocket_gtest.bin', '', d)} \
@@ -63,7 +63,7 @@ FILES_${PN}-gtest = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/JsonParser_gtest.bin', '', d)} \
 "
 
-FILES_${PN} = " \
+FILES_${PN} += " \
     ${bindir}/OvsAgent \
     ${prefix}/ccsp/ovsagent/OvsAgent \
     ${prefix}/ccsp/ovsagent/syscfg_check.sh \

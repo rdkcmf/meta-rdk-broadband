@@ -35,13 +35,10 @@ do_install_append () {
 }
 
 #SYSTEMD_SERVICE_${PN} = "gwprovethwan.service"
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/gw_prov_ethwan_gtest.bin', '', d)} \
-"
-FILES_${PN} = "\
-    ${bindir}/gw_prov_ethwan \
 "
 
 FILES_${PN} += " \

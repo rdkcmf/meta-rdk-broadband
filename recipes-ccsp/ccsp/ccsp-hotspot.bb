@@ -52,14 +52,10 @@ do_install_append () {
 }
 
 PACKAGES += "${PN}-ccsp"
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspHotspot_gtest.bin', '', d)} \
-"
-FILES_${PN} = "\
-    ${bindir}/CcspHotspot \
-    ${bindir}/hotspot_arpd \
 "
 
 FILES_${PN}-ccsp = " \

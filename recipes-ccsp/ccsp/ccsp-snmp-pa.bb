@@ -77,16 +77,10 @@ FILES_${PN}-dbg = " \
 	${@bb.utils.contains("DISTRO_FEATURES", "snmppa", "${libdir}/.debug ", " ", d)} \
 "
 
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/snmp_subagent_gtest.bin', '', d)} \
-"
-
-FILES_${PN} = "\
-  ${bindir}/snmp_subagent \
-  ${libdir}/libsnmp_plugin.so* \
-  ${libdir}/libsnmp_custom.so* \
 "
 
 DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-snmp_subagent', '', d)}"

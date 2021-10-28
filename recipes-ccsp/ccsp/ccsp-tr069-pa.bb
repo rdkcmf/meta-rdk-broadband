@@ -54,14 +54,10 @@ do_install_append () {
 }
 
 PACKAGES += "${PN}-ccsp"
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspTr069PaSsp_gtest.bin', '', d)} \
-"
-
-FILES_${PN} = "\
-    ${bindir}/CcspTr069PaSsp \
 "
 
 FILES_${PN}-ccsp = " \

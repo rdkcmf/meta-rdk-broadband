@@ -95,17 +95,10 @@ do_install_append_ciscoxb3atom () {
 
 PACKAGES += "${PN}-ccsp"
 
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/Dmcli_gtest.bin', '', d)} \
-"
-
-FILES_${PN} = "\
-    ${bindir}/MsgBusTestClient \
-    ${bindir}/ccsp_bus_client_tool \
-    ${bindir}/MsgBusTestServer \
-    ${bindir}/dmcli \
 "
 
 FILES_${PN}-ccsp = " \

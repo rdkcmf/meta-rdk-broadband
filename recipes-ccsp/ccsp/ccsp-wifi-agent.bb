@@ -109,13 +109,13 @@ do_install_append_bcm3390() {
     rm ${D}/usr/ccsp/wifi/br0_ip.sh
 }
 
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
-FILES_${PN}-gtest = "\
+FILES_${PN}-gtest = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspWifiSsp_gtest.bin', '', d)} \
 "
 
-FILES_${PN} = " \
+FILES_${PN} = "\
     ${bindir}/CcspWifiSsp \
     ${libdir}/libwifi.so* \
     ${prefix}/ccsp/wifi/process_monitor_atom.sh \

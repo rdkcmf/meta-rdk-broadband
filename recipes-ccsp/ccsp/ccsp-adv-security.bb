@@ -52,17 +52,14 @@ do_install_append () {
 PACKAGES += "${PN}-ccsp"
 INSANE_SKIP_${PN} += "ldflags libdir"
 
-FILES_${PN} = " \
+FILES_${PN} += " \
     ${bindir}/CcspAdvSecuritySsp \
     ${prefix}/ccsp/* \
-    /usr/bin/CcspAdvSecuritySsp \
     ${prefix}/ccsp/advsec/CcspAdvSecuritySsp \
     ${prefix}/ccsp/advsec/start_adv_security.sh \
     ${prefix}/ccsp/advsec/advsec_log_fp_status.sh \
     ${prefix}/ccsp/advsec/advsec_cpu_mem_recovery.sh \
     ${prefix}/ccsp/advsec/advsec.sh \
-    ${libdir}/libdmlasecurity.so* \
-    /var/empty \
 "
 
 FILES_${PN}-dbg += " \
@@ -72,7 +69,7 @@ FILES_${PN}-dbg += " \
     ${libdir}/.debug \
 "
 
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspAdvSecuritySsp_gtest.bin', '', d)} \

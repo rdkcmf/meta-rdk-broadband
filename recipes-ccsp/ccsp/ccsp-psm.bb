@@ -64,10 +64,6 @@ do_install_append_qemuarm () {
     install -m 644 ${S}/config/bbhm_def_cfg_qemu.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
 }
 
-FILES_${PN} = " \
-    ${bindir}/PsmSsp \
-"
-
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN}-ccsp = " \
@@ -83,7 +79,7 @@ FILES_${PN}-dbg = " \
     ${libdir}/.debug \
 "
 
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/PsmSsp_gtest.bin', '', d)} \

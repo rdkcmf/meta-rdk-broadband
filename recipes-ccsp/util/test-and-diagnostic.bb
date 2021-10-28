@@ -68,16 +68,10 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspTandDSsp_gtest.bin', '', d)} \
-"
-
-FILES_${PN} = "\
-    ${libdir}/libdmltad.so \
-    ${libdir}/libdiagnostic.so \
-    ${bindir}/Selfhealutil \
 "
 
 FILES_${PN}-ccsp = " \

@@ -79,16 +79,10 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspCMAgentSsp_gtest.bin', '', d)} \
-"
-
-FILES_${PN} = "\
-    ${prefix}/ccsp/cm/TR181-CM.XML \
-    ${libdir}/libcm_tr181.so* \
-    ${bindir}/CcspCMAgentSsp \
 "
 
 FILES_${PN}-ccsp = " \

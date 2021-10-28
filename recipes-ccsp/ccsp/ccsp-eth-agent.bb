@@ -66,15 +66,10 @@ do_install_append () {
     install -m 644 ${S}/config/TR181-EthAgent.xml ${D}${exec_prefix}/ccsp/ethagent/TR181-EthAgent.xml
 }
 
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspEthAgent_gtest.bin', '', d)} \
-"
-
-FILES_${PN} =" \
-        ${libdir}/systemd \
-        ${bindir}/CcspEthAgent \
 "
 
 FILES_${PN} += " ${exec_prefix}/ccsp/ethagent"

@@ -42,15 +42,10 @@ do_install_append () {
     install -m 644 ${S}/config/CcspEPON.cfg ${D}/usr/ccsp/epon/CcspEPON.cfg
 }
 
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspEPONAgentSsp_gtest.bin', '', d)} \
-"
-
-FILES_${PN} = " \
-        ${bindir}/CcspEPONAgentSsp \
-        ${libdir}/libepon_tr181.so* \
 "
 
 FILES_${PN} += " \

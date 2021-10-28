@@ -62,13 +62,10 @@ do_install_append_bcm3390(){
     install -d ${D}${exec_prefix}/ccsp/notify-comp
     install -m 644 ${S}/scripts/msg_daemon.cfg ${D}${exec_prefix}/ccsp/notify-comp/msg_daemon.cfg
 }
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/notify_comp_gtest.bin', '', d)} \
-"
-FILES_${PN} = "\
-    ${bindir}/notify_comp \
 "
 
 FILES_${PN} += "${exec_prefix}/ccsp/notify-comp"

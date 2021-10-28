@@ -29,15 +29,10 @@ do_install_append () {
 }
 
 PACKAGES += "${PN}-ccsp"
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspHomeSecurity_gtest.bin', '', d)} \
-"
-
-FILES_${PN} = " \
-        ${bindir}/CcspHomeSecurity \
-        /etc/icybmwvdo.dna \
 "
 
 FILES_${PN}-ccsp = " \

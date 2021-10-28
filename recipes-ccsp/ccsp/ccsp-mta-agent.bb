@@ -56,15 +56,10 @@ do_install_append () {
 
 
 PACKAGES += "${PN}-ccsp"
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspMtaAgentSsp_gtest.bin', '', d)} \
-"
-
-FILES_${PN} = " \
-        ${bindir}/CcspMtaAgentSsp \
-        ${libdir}/libmta_tr181.so* \
 "
 
 FILES_${PN}-ccsp = " \

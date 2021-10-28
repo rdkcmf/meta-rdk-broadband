@@ -53,14 +53,10 @@ do_install_append () {
     install -m 644 ${S}/scripts/msg_daemon.cfg ${D}${prefix}/ccsp/logagent/msg_daemon.cfg
 }
 
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/log_agent_gtest.bin', '', d)} \
-"
-
-FILES_${PN} = " \
-        ${bindir}/log_agent \
 "
 
 FILES_${PN} += "${prefix}/ccsp/logagent"

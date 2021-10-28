@@ -87,12 +87,7 @@ FILES_${PN}-dbg = " \
     ${libdir}/.debug \
 "
 
-FILES_${PN} = "\
-    ${bindir}/CcspLMLite \
-    ${libdir}/liblmapi.so* \
-"
-
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspLMLite_gtest.bin', '', d)} \

@@ -60,19 +60,16 @@ do_install_append () {
 }
 
 PACKAGES += "${PN}-ccsp"
-PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspXdnsSsp_gtest.bin', '', d)} \
 "
 
-FILES_${PN} = "\
-    ${bindir}/CcspXdnsSsp \
-"
-
 FILES_${PN} += " \
     ${prefix}/ccsp/xdns \
-    ${libdir}/libdmlxdns.so* \
+    ${libdir}/libdmlxdns.so.* \
+    ${bindir}/* \
 "
 
 FILES_${PN}-dbg += " \

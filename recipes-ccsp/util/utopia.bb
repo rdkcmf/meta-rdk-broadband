@@ -102,13 +102,6 @@ do_install_append () {
     ln -sf /usr/bin/syscfg ${D}${bindir}/syscfg_check
 }
 
-FILES_${PN} = " \
-  ${sbindir}/* \
-  ${libdir}/* \
-  ${bindir}/* \
-  ${sysconfdir}/* \
-"
-
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system firewall"
 USERADD_PARAM_${PN} += "--system --home ${localstatedir}/run/firewall/ -M -g firewall --shell /bin/false firewall"
