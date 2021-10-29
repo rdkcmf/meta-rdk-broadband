@@ -11,7 +11,6 @@ require ccsp_common.inc
 
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/CcspEthAgent;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=CcspEthAgent"
 CFLAGS += " -Wall -Werror -Wextra "
-CFLAGS_append_dunfell = " -Wno-format-truncation "
 
 S = "${WORKDIR}/git"
 
