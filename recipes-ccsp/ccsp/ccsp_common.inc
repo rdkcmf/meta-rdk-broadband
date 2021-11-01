@@ -95,6 +95,9 @@ CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_extender', '-DR
 
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', '-DRDK_ONEWIFI', '', d)}"
 
+# Adding flag for DHCP Manager
+CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'dhcp_manager', '-DFEATURE_RDKB_DHCP_MANAGER', '', d)}"
+
 FILES_${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP_${PN} += "dev-so"
