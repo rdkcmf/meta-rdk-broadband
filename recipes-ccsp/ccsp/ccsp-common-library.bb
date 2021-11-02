@@ -40,8 +40,6 @@ CFLAGS += " \
 
 CFLAGS += " -Wall -Werror -Wextra "
 
-CFLAGS_append_dunfell = " -Wno-restrict -Wno-format-truncation -Wno-format-overflow -Wno-cast-function-type -Wno-unused-function -Wno-implicit-fallthrough "
-
 LDFLAGS += " \
     -ldbus-1 \
     -lrbus-core \
