@@ -12,7 +12,6 @@ inherit breakpad-wrapper
 BREAKPAD_BIN_append = " parodusStart"
 
 CFLAGS += " -Wall -Werror -Wextra "
-CFLAGS_append_dunfell = " -Wno-format-truncation "
 
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/generic/startParodus;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=startParodus"
 SRCREV = "${AUTOREV}"
