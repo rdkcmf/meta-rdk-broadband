@@ -13,7 +13,6 @@ SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/CcspSnmpPa;protocol=$
 
 CFLAGS += " -Wall -Werror -Wextra "
 
-CFLAGS_append_dunfell = " -Wno-format-overflow -Wno-stringop-truncation -Wno-memset-elt-size  -Wno-implicit-fallthrough "
 
 SRCREV_CcspSnmpPa = "${AUTOREV}"
 SRCREV_FORMAT = "CcspSnmpPa"
