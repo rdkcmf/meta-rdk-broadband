@@ -31,7 +31,6 @@ CFLAGS += " \
 
 CFLAGS += " -Wall -Werror -Wextra "
 
-CFLAGS_append_dunfell = " -Wno-format-truncation -Wno-stringop-overflow -Wno-array-bounds "
 
 LDFLAGS_append = " \
     -lcurl \
