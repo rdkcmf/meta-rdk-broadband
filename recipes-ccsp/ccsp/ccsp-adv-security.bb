@@ -29,7 +29,6 @@ RDEPENDS_${PN}_append_dunfell += "bash"
 S = "${WORKDIR}/git"
 
 CFLAGS += " -Wall -Werror -Wextra "
-CFLAGS_append_dunfell = " -Wno-stringop-truncation "
 
 do_compile_prepend () {
        (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config/TR181-AdvSecurity.xml ${S}/source/AdvSecuritySsp/dm_pack_datamodel.c)
