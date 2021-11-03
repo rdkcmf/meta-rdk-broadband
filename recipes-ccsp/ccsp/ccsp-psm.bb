@@ -23,8 +23,6 @@ inherit autotools
 
 CFLAGS += " -Wall -Werror -Wextra "
 
-CFLAGS_append_dunfell = " -Wno-restrict -Wno-format-overflow "
-
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
 
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
