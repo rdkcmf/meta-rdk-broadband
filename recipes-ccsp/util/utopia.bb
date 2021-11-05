@@ -40,7 +40,7 @@ CFLAGS += " \
     -DCONFIG_BUILD_TRIGGER \
     "
 
-CFLAGS_append_dunfell = " -I${STAGING_INCDIR}/tirpc -Wno-cast-function-type -Wno-address-of-packed-member "
+CFLAGS_append_dunfell = " -I${STAGING_INCDIR}/tirpc "
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'bci', '-DCISCO_CONFIG_TRUE_STATIC_IP -DCISCO_CONFIG_DHCPV6_PREFIX_DELEGATION', '', d)}"
 
