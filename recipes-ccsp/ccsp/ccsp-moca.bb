@@ -11,7 +11,6 @@ require ccsp_common.inc
 
 CFLAGS += " -Wall -Werror -Wextra -Wno-address "
 
-CFLAGS_append_dunfell = " -Wno-format-truncation -Wno-address-of-packed-member "
 
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/CcspMoCA;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=CcspMoCA"
 
