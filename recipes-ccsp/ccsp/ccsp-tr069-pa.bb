@@ -24,7 +24,7 @@ CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-confi
 
 CFLAGS_append = " -Wall -Werror -Wextra -Wno-ignored-qualifiers "
 
-CFLAGS_append_dunfell = " -Wno-restrict -Wno-format-overflow -Wno-deprecated-declarations -Wno-cast-function-type "
+CFLAGS_append_dunfell = " -Wno-deprecated-declarations "
 
 LDFLAGS +=" -lsyscfg"
 
