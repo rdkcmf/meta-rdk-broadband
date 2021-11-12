@@ -104,6 +104,9 @@ do_compile_prepend () {
     if ${@bb.utils.contains('DISTRO_FEATURES', 'passpoint', 'true', 'false', d)}; then
     sed -i '2i <?define FEATURE_SUPPORT_PASSPOINT=True?>' ${S}/config-arm/TR181-USGv2.XML
     fi
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'offchannel_scan_5g', 'true', 'false', d)}; then
+    sed -i '2i <?define FEATURE_OFF_CHANNEL_SCAN_5G=True?>' ${S}/config-arm/TR181-USGv2.XML
+    fi
     if ${@bb.utils.contains('DISTRO_FEATURES', 'fwupgrade_manager', 'true', 'false', d)}; then
     sed -i '2i <?define FEATURE_FWUPGRADE_MANAGER=True?>' ${S}/config-arm/TR181-USGv2.XML
     fi

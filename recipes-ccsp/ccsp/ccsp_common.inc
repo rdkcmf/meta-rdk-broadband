@@ -65,6 +65,9 @@ CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_xdsl_ppp_manage
 #Add flags to support WiFi PSM DB
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'wifi-psm-db', '-DFEATURE_SUPPORT_WIFIDB', '', d)}"
 
+#Add flags to support Off Channel Scan for 5G Radio
+CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'offchannel_scan_5g', '-DFEATURE_OFF_CHANNEL_SCAN_5G', '', d)}"
+
 # Add flag to support HIGH split 
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'highsplit', '-D_CM_HIGHSPLIT_SUPPORTED_', '', d)}"
 
