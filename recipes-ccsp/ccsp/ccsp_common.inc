@@ -36,6 +36,9 @@ CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'passpoint', '-DFEATU
 #Add flags to support RadiusGreyList  if the feature is available.
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'RadiusGreyList', '-DFEATURE_SUPPORT_RADIUSGREYLIST', '', d)}"
 
+# Add flags to support DFS if the feature is available.
+CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'dfs', '-DCONFIG_DFS', '', d)}"
+
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'bci', '', '-DFEATURE_SUPPORT_ONBOARD_LOGGING',d)}"
 
 # To have a common macro for reference platform
