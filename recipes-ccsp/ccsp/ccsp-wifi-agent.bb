@@ -27,7 +27,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig systemd pythonnative
+inherit autotools pkgconfig systemd pythonnative breakpad-logmapper
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
 
@@ -159,3 +159,6 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="gtest"
 SKIP_MAIN_PKG="yes"
 DOWNLOAD_ON_DEMAND="yes"
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "CcspWifiSsp,log_agent"
+BREAKPAD_LOGMAPPER_LOGLIST = "WiFilog.txt.0,WifiConsole.txt,wifihealth.txt"

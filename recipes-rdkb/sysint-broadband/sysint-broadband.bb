@@ -18,7 +18,7 @@ SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 
-inherit systemd
+inherit systemd breakpad-logmapper
 
 do_install() {
 	install -d ${D}${sysconfdir}
@@ -143,3 +143,6 @@ FILES_${PN}_append_container = " \
 SYSTEMD_SERVICE_${PN}_append_container = " iptables_lxc.path \
                                            lxc.path \
                                          "
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "bleagent"
+BREAKPAD_LOGMAPPER_LOGLIST = "Blelog.txt.0"

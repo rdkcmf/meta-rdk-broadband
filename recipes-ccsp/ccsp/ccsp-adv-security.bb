@@ -34,7 +34,7 @@ do_compile_prepend () {
        (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config/TR181-AdvSecurity.xml ${S}/source/AdvSecuritySsp/dm_pack_datamodel.c)
 }
 
-inherit autotools coverity pythonnative
+inherit autotools coverity pythonnative breakpad-logmapper
 
 do_install_append () {
     # Config files and scripts
@@ -80,3 +80,7 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
 SKIP_MAIN_PKG="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
 DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "CcspAdvSecurity"
+BREAKPAD_LOGMAPPER_LOGLIST = "ADVSEClog.txt.0,agent.txt"

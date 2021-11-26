@@ -20,7 +20,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools breakpad-logmapper
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
 
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
@@ -88,3 +88,6 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="gtest"
 SKIP_MAIN_PKG="yes"
 DOWNLOAD_ON_DEMAND="yes"
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "snmp_subagent,snmpd"
+BREAKPAD_LOGMAPPER_LOGLIST = "SNMP.txt.0"

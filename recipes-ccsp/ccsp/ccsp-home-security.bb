@@ -14,7 +14,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools breakpad-logmapper
 
 CFLAGS += " -Wall -Werror -Wextra "
 
@@ -50,3 +50,6 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="gtest"
 SKIP_MAIN_PKG="yes"
 DOWNLOAD_ON_DEMAND="yes"
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "CcspHomeSecurit"
+BREAKPAD_LOGMAPPER_LOGLIST = "ADVSEClog.txt.0,agent.txt"

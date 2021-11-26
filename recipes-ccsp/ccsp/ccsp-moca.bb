@@ -21,7 +21,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig pythonnative
+inherit autotools pkgconfig pythonnative breakpad-logmapper
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
 
@@ -96,3 +96,6 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="gtest"
 SKIP_MAIN_PKG="yes"
 DOWNLOAD_ON_DEMAND="yes"
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "CcspMoCA"
+BREAKPAD_LOGMAPPER_LOGLIST = "MOCAlog.txt.0,moca_telemetry.txt"

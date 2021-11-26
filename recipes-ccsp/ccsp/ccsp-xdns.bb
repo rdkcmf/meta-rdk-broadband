@@ -20,7 +20,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig pythonnative
+inherit autotools pkgconfig pythonnative breakpad-logmapper
 
 CFLAGS += " -Wall -Werror -Wextra "
 
@@ -84,3 +84,6 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="gtest"
 SKIP_MAIN_PKG="yes"
 DOWNLOAD_ON_DEMAND="yes"
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "CcspXdnsSsp"
+BREAKPAD_LOGMAPPER_LOGLIST = "XDNSlog.txt.0"

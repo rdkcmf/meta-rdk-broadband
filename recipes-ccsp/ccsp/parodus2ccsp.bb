@@ -29,7 +29,7 @@ S = "${WORKDIR}/git"
 require ccsp_common.inc
 
 # generating minidumps symbols
-inherit breakpad-wrapper pythonnative
+inherit breakpad-wrapper pythonnative breakpad-logmapper
 BREAKPAD_BIN_append = " webpa"
 
 LDFLAGS += "-lpthread -lcjson -lmsgpackc -ltrower-base64 -lnanomsg -lcimplog -lwdmp-c -lwrp-c -llibparodus -lm -luuid -lstdc++ -lbreakpadwrapper -lsysevent -lutapi -lutctx -lsyscfg -lprivilege"
@@ -82,3 +82,6 @@ FILES_${PN} += " \
     ${exec_prefix}/ccsp/webpa \
     ${bindir}/webpa \
 "
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "webpa"
+BREAKPAD_LOGMAPPER_LOGLIST = "WEBPAlog.txt.0"

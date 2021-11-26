@@ -19,7 +19,7 @@ CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-sign-compare -Wno-type-
 RDEPENDS_${PN}_append_dunfell = " bash"
 RDEPENDS_${PN}-ccsp_append_dunfell += " bash"
 
-inherit autotools pythonnative
+inherit autotools pythonnative breakpad-logmapper
 
 CFLAGS_append = " \
     -I${STAGING_INCDIR} \
@@ -98,3 +98,6 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
 SKIP_MAIN_PKG="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
 DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "CcspTandDSsp"
+BREAKPAD_LOGMAPPER_LOGLIST = "TDMlog.txt.0"

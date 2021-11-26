@@ -15,7 +15,7 @@ SRCREV_notify-comp = "${AUTOREV}"
 SRCREV_FORMAT = "notify-comp"
 
 S = "${WORKDIR}/git/notify_comp"
-inherit autotools pkgconfig breakpad-wrapper coverity pythonnative
+inherit autotools pkgconfig breakpad-wrapper coverity pythonnative breakpad-logmapper
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
 
@@ -75,3 +75,6 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
 SKIP_MAIN_PKG="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
 DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "notify_comp"
+BREAKPAD_LOGMAPPER_LOGLIST = "NOTIFYLog.txt.0"

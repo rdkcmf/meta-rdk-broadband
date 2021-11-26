@@ -18,7 +18,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 SRCREV = "${AUTOREV}"
 SRCREV_FORMAT = "${AUTOREV}"
 
-inherit autotools pythonnative
+inherit autotools pythonnative breakpad-logmapper
 
 PACKAGECONFIG ?= "dropearly"
 PACKAGECONFIG[dropearly] = "--enable-dropearly,--disable-dropearly"
@@ -79,3 +79,6 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="gtest"
 SKIP_MAIN_PKG="yes"
 DOWNLOAD_ON_DEMAND="yes"
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "CcspEthAgent"
+BREAKPAD_LOGMAPPER_LOGLIST = "ETHAGENTLog.txt.0"

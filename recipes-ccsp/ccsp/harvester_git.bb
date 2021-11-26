@@ -27,7 +27,7 @@ CFLAGS_append = " \
 
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools breakpad-logmapper
 
 # generating minidumps symbols
 inherit breakpad-wrapper
@@ -96,3 +96,6 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
 SKIP_MAIN_PKG="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
 DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "harvester"
+BREAKPAD_LOGMAPPER_LOGLIST = "Harvesterlog.txt.0"

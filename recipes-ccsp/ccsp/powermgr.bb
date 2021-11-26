@@ -25,7 +25,7 @@ LDFLAGS_append = " \
 
 S = "${WORKDIR}/git"
 
-inherit autotools systemd
+inherit autotools systemd breakpad-logmapper
 
 # generating minidumps symbols
 inherit breakpad-wrapper
@@ -74,3 +74,7 @@ DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', '
 
 # generating minidumps
 PACKAGECONFIG_append = " breakpad"
+
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "rdkbPowerMgr"
+BREAKPAD_LOGMAPPER_LOGLIST = "POWERMGRLog.txt.0"

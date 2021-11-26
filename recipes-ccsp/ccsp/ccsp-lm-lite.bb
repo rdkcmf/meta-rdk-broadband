@@ -17,7 +17,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig pythonnative
+inherit autotools pkgconfig pythonnative breakpad-logmapper
 
 CFLAGS += " \
     -I${STAGING_INCDIR}/dbus-1.0 \
@@ -98,4 +98,6 @@ inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="gtest"
 SKIP_MAIN_PKG="yes"
 DOWNLOAD_ON_DEMAND="yes"
-
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "CcspLMLite"
+BREAKPAD_LOGMAPPER_LOGLIST = "LM.txt.0"
