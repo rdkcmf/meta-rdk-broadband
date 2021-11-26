@@ -36,8 +36,6 @@ LDFLAGS_append = " \
     -lcurl \
     -lxml2 \
     -ldbus-1 \
-    -ltelemetry_msgsender \
-    -lsecure_wrapper \
     "
 
 EXTRA_OECONF_append = "${@bb.utils.contains("DISTRO_FEATURES", "seshat", " --enable-seshat ", " ", d)}"
