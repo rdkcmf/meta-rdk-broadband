@@ -1,4 +1,5 @@
 CXXFLAGS_append += " -D_RDK_BROADBAND_PRIV_CAPS_ "
+CFLAGS_append = " -D_RDK_BROADBAND_PRIV_CAPS_"
 require recipes-ccsp/ccsp/ccsp_common.inc
 
 do_install_append(){
