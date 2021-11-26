@@ -32,7 +32,7 @@ CFLAGS += " \
    -I${STAGING_INCDIR}/ccsp \
    "
 
-LDFLAGS += "-ldbus-1 -ltelemetry_msgsender -lbreakpadwrapper"
+LDFLAGS += "-ldbus-1 -lbreakpadwrapper"
 
 do_compile_prepend(){
     (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/source/hotspotfd/config/hotspot.XML ${S}/source/hotspotfd/dm_pack_datamodel.c)
