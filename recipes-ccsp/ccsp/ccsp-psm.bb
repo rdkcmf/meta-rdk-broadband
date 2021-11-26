@@ -43,7 +43,6 @@ CFLAGS_append = " \
 
 LDFLAGS_append = " \
     -ldbus-1 \
-    -lrbus \
     "
 
 do_install_append () {
