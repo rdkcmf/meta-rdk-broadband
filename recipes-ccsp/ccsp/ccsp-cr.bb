@@ -36,7 +36,7 @@ CFLAGS_append = " \
     -I${STAGING_INCDIR}/libxml2 \
     "
 
-LDFLAGS += "-ldbus-1 -ltelemetry_msgsender -lprivilege -lutapi -lutctx -lsyscfg -lrtMessage -lrbus-core -lrbus -lcjson -lmsgpackc -lxml2"
+LDFLAGS += "-ldbus-1 -ltelemetry_msgsender -lprivilege -lutapi -lutctx -lsyscfg -lcjson -lmsgpackc"
 
 do_install_append () {
     # Config files and scripts
