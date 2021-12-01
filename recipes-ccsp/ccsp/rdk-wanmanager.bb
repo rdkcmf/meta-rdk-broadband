@@ -41,13 +41,15 @@ do_compile_prepend () {
 do_install_append () {
     # Config files and scripts
     install -d ${D}${exec_prefix}/rdk/wanmanager
-    ln -sf ${bindir}/wanmanager ${D}${exec_prefix}/rdk/wanmanager/wanmanager 
+    ln -sf ${bindir}/wanmanager ${D}${exec_prefix}/rdk/wanmanager/wanmanager
+    ln -sf ${bindir}/netmonitor ${D}${exec_prefix}/rdk/wanmanager/netmonitor
     install -m 644 ${S}/config/RdkWanManager.xml ${D}/usr/rdk/wanmanager
 }
 
 
 FILES_${PN} = " \
    ${exec_prefix}/rdk/wanmanager/wanmanager \
+   ${exec_prefix}/rdk/wanmanager/netmonitor \
    ${exec_prefix}/rdk/wanmanager/RdkWanManager.xml \
    ${bindir}/* \
 "
