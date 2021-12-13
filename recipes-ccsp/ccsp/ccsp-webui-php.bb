@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/ccsp-yocto/webui"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://../../LICENSE;md5=ecf4e15f1559e48fc2b54f092948be4c"
 
-DEPENDS = "ccsp-common-library php chrpath-replacement-native ccsp-webui-csrf sso"
+DEPENDS = "ccsp-common-library php chrpath-replacement-native ccsp-webui-csrf"
 
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
@@ -47,7 +47,6 @@ CFLAGS += " \
 
 LDFLAGS += " \
      -ldbus-1 \
-     -lsso \
      "
 do_configure_prepend () {
 	(cd ${S} && ${STAGING_BINDIR_CROSS}/phpize && aclocal && libtoolize --force && autoreconf)

@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/ccsp-yocto/webui"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://../../LICENSE;md5=0ef5cb68a38cd4d4c9f9d350c50f68f8"
 
-DEPENDS = "ccsp-common-library php ccsp-webui-csrf sso"
+DEPENDS = "ccsp-common-library php ccsp-webui-csrf"
 require ccsp_common.inc
 SRC_URI = "\
     ${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/webui-bwg;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH} \
@@ -45,7 +45,6 @@ CFLAGS += " \
 
 LDFLAGS += " \
      -ldbus-1 \
-     -lsso \
      "
 do_configure_prepend () {
 	(cd ${S} && ${STAGING_BINDIR_CROSS}/phpize && aclocal && libtoolize --force && autoreconf)

@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/ccsp-yocto/webui"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${THISDIR}/../../LICENSE;md5=5bfad6e034e497ee148eec56e175c6e8"
 
-DEPENDS = "ccsp-common-library sso"
+DEPENDS = "ccsp-common-library"
 require ccsp_common.inc
 SRC_URI = "\
     ${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/webui-bwg;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH} \
@@ -43,7 +43,6 @@ CFLAGS += " \
 
 LDFLAGS += " \
      -ldbus-1 \
-     -lsso \
      "
 
 EXTRA_OECONF = "CCSP_COMMON_LIB=${STAGING_LIBDIR}"

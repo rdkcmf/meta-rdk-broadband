@@ -20,10 +20,6 @@ CFLAGS_append = " \
     "
 LDFLAGS_append += "${@bb.utils.contains('DISTRO_FEATURES', 'rbus', '', '-ldbus-1', d)}"
 
-DEPENDS += " ${@bb.utils.contains('DISTRO_FEATURES', 'comcast_sso_remove', '', 'sso', d)}"
-CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'comcast_sso_remove', '', '-DCOMCAST_SSO', d)}"
-LDFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'comcast_sso_remove', '', '-lsso', d)}"
-
 do_install_append() {
  install -d ${D}/usr/www2/
  install -d ${D}/usr/www2/includes
