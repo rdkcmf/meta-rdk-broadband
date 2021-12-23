@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/belvedere-yocto/hotspot"
 LICENSE = "Apache-2.0 & ISC"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7fd38647ff87fdac48b3fb87e20c1b07"
 
-DEPENDS = "dbus libnetfilter-queue utopia ccsp-lm-lite telemetry"
+DEPENDS = "dbus libnetfilter-queue utopia ccsp-lm-lite telemetry libunpriv"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
 require ccsp_common.inc
