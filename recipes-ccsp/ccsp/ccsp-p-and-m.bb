@@ -20,7 +20,7 @@ require ccsp_common.inc
 
 CFLAGS += " -Wall -Werror -Wextra -Wno-shift-negative-value"
 
-CFLAGS_append_dunfell = " -Wno-deprecated-declarations "
+CFLAGS_append_dunfell = " -Wno-format-truncation -Wno-format-overflow -Wno-deprecated-declarations -Wno-sizeof-pointer-memaccess -Wno-memset-elt-size -Wno-maybe-uninitialized "
 
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/CcspPandM;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=CcspPandM"
 
