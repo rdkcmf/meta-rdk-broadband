@@ -10,6 +10,7 @@ CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-sign-compare "
 SRCREV_hotspot-kmod = "${AUTOREV}"
 SRCREV_FORMAT = "hotspot-kmod"
 PV = "${RDK_RELEASE}+git${SRCPV}"
+do_compile[lockfiles] = "${TMPDIR}/kernel-scripts.lock"
 
 S = "${WORKDIR}/git"
 
