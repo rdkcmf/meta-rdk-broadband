@@ -92,6 +92,8 @@ do_install_append () {
     install -m 755 ${S}/source/scripts/init/service.d/logrotate.sh ${D}${sysconfdir}/cron/cron.every5minute/
     install -m 755 ${S}/source/scripts/init/service.d/sysevent_tick.sh ${D}${sysconfdir}/cron/cron.everyminute/
 
+    install -m 755 ${S}/source/scripts/init/service.d/waninfo.sh ${D}${sysconfdir}/
+
     install -d ${D}${includedir}/ccsp
     install -m 644 ${S}/source/util/print_uptime/print_uptime.h ${D}${includedir}/ccsp
 
