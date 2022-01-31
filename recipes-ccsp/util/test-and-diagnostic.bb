@@ -49,6 +49,10 @@ CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-confi
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 
+# Limited Warehouse Parameters if XB doesn't support Full Fan Control
+CFLAGS_append += "${@bb.utils.contains('DISTRO_FEATURES', 'warehouseFan','-DLIMITED_FAN_WAREHOUSE','',d)}"
+LDFLAGS_append += "${@bb.utils.contains('DISTRO_FEATURES', 'warehouseFan',' -lhal_platform','',d)}"
+
 do_compile_prepend () {
     (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config/TestAndDiagnostic_arm.XML ${S}/source/TandDSsp/dm_pack_datamodel.c)
 }
