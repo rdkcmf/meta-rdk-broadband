@@ -99,7 +99,13 @@ do_install_append () {
     install -d ${D}/usr/include/middle_layer_src/wifi
     install -m 644 ${S}/source/dml/tr_181/sbapi/*.h ${D}/usr/include/ccsp
     install -m 644 ${S}/include/tr_181/ml/*.h ${D}/usr/include/middle_layer_src/wifi
-	
+    install -m 644 ${S}/include/webconfig_external_proto_ovsdb.h  ${D}/usr/include/ccsp
+    install -m 644 ${S}/include/webconfig_external_proto.h  ${D}/usr/include/ccsp
+    install -m 644 ${S}/include/webconfig_external_proto_tr181.h  ${D}/usr/include/ccsp
+    install -m 644 ${S}/include/wifi_webconfig.h       ${D}/usr/include/ccsp
+    install -m 644 ${S}/include/wifi_base.h       ${D}/usr/include/ccsp
+
+
 	if [ ${ISSYSTEMD} = "true" ]; then
     	install -d ${D}${systemd_unitdir}/system
     	install -D -m 755 ${S}/scripts/wifiTelemetrySetup.sh ${D}${exec_prefix}/ccsp/wifi/wifiTelemetrySetup.sh
