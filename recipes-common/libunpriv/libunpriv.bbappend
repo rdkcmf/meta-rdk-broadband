@@ -10,6 +10,7 @@ do_install_append(){
             sed -i '/webpa/!b;n;n;c \      "drop":"UGID_GROUP"' ${D}${sysconfdir}/security/caps/process-capabilities.json
             sed -i '/parodus/!b;n;n;c \      "drop":"UGID_GROUP"' ${D}${sysconfdir}/security/caps/process-capabilities.json
             sed -i '/PsmSsp/!b;n;n;c \      "drop":"UGID_GROUP"' ${D}${sysconfdir}/security/caps/process-capabilities.json
+            sed -i '/CcspLMLite/!b;n;n;c \      "drop":""' ${D}${sysconfdir}/security/caps/process-capabilities.json
         fi
 }
 
