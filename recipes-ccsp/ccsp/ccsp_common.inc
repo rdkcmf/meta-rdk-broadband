@@ -81,6 +81,9 @@ CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'highsplit', '-D_CM_H
 # Adding flag for cellular manager
 CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_cellular_manager', ' -DFEATURE_RDKB_CELLULAR_MANAGER', '', d)}"
 
+# Adding flag for inter-device manager
+CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_inter_device_manager', '-DFEATURE_RDKB_INTER_DEVICE_MANAGER', '', d)}"
+
 FILES_${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP_${PN} += "dev-so"
