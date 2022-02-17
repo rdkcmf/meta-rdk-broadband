@@ -68,6 +68,8 @@ do_install_append () {
     install -m 644 ${S}/config/CcspMoCADM.cfg ${D}/usr/ccsp/moca/CcspMoCADM.cfg
     install -m 0755 ${S}/scripts/MoCA_isolation.sh ${D}/usr/ccsp/moca/MoCA_isolation.sh
     install -m 0755 ${S}/scripts/moca_whitelist_ctl.sh ${D}/usr/ccsp/moca/moca_whitelist_ctl.sh
+    install -m 0755 ${S}/scripts/moca_mroute.sh ${D}/usr/ccsp/moca/moca_mroute.sh
+    install -m 0755 ${S}/scripts/moca_mroute_ip.sh ${D}/usr/ccsp/moca/moca_mroute_ip.sh
 }
 
 PACKAGES += "${PN}-ccsp"
@@ -82,6 +84,8 @@ FILES_${PN}-ccsp += " \
     ${prefix}/ccsp/moca/CcspMoCADM.cfg  \
     ${prefix}/ccsp/moca/MoCA_isolation.sh  \
     ${prefix}/ccsp/moca/moca_whitelist_ctl.sh  \
+    ${prefix}/ccsp/moca/moca_mroute.sh  \
+    ${prefix}/ccsp/moca/moca_mroute_ip.sh  \
 "
 
 FILES_${PN}-dbg = " \
