@@ -8,6 +8,8 @@ do_install_append(){
         install -m 755 ${S}/source/process-capabilities_rdkb.json ${D}${sysconfdir}/security/caps/process-capabilities.json
         if [ "${MACHINE_IMAGE_NAME}" = "CGA4332COM" ] || [ "${MACHINE_IMAGE_NAME}" = "CGM4981COM" ]; then
             sed -i '/webpa/!b;n;n;c \      "drop":"UGID_GROUP"' ${D}${sysconfdir}/security/caps/process-capabilities.json
+            sed -i '/parodus/!b;n;n;c \      "drop":"UGID_GROUP"' ${D}${sysconfdir}/security/caps/process-capabilities.json
+            sed -i '/PsmSsp/!b;n;n;c \      "drop":"UGID_GROUP"' ${D}${sysconfdir}/security/caps/process-capabilities.json
         fi
 }
 
