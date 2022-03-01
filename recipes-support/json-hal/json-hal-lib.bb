@@ -6,8 +6,7 @@ DEPENDS += " json-c json-schema-validator"
 
 SRC_URI = "${RDKB_COMPONENTS_ROOT_GIT}/generic/json-rpc/generic;protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=json_hal"
 
-PV = "${RDK_RELEASE}+git${SRCPV}"
-
+PV = "2.0+git${SRCPV}"
 SRCREV_json_hal = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
