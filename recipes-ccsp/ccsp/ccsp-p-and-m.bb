@@ -45,6 +45,7 @@ LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'safec dunfell', ' -ls
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wbCfgTestApp', '-DWEBCFG_TEST_SIM', '', d)}"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'ethstats', '-DETH_STATS_ENABLED', '', d)}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'wifimotion', '-DFEATURE_COGNITIVE_WIFIMOTION', '', d)}"
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', '-lnanomsg', '', d)}"
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'fwupgrade_manager', '-lfw_upgrade', '', d)}"
 
@@ -121,6 +122,9 @@ do_compile_prepend () {
     fi
     if ${@bb.utils.contains('DISTRO_FEATURES', 'RadiusGreyList', 'true', 'false', d)}; then
     sed -i '2i <?define FEATURE_SUPPORT_RADIUSGREYLIST=True?>' ${S}/config-arm/TR181-USGv2.XML
+    fi
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'wifimotion', 'true', 'false', d)}; then
+    sed -i '2i <?define FEATURE_COGNITIVE_WIFIMOTION=True?>' ${S}/config-arm/TR181-USGv2.XML
     fi
     sed -i '2i <?define CONFIG_INTERNET2P0=True?>' ${S}/config-arm/TR181-USGv2.XML
     sed -i '2i <?define CONFIG_VENDOR_CUSTOMER_COMCAST=True?>' ${S}/config-arm/TR181-USGv2.XML
