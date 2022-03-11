@@ -87,6 +87,10 @@ CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_inter_device_m
 # Add flags to support MAP-T NAT46 Feature
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'nat46', '-DFEATURE_SUPPORT_MAPT_NAT46', '', d)}"
 
+# Adding flag for wan failover
+CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' -DWAN_FAILOVER_SUPPORTED', '', d)}"
+
+
 FILES_${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP_${PN} += "dev-so"
