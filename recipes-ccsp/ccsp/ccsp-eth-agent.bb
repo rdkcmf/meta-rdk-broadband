@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
 DEPENDS = "ccsp-common-library dbus utopia hal-ethsw hal-platform curl ccsp-lm-lite libunpriv"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
+DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' rbus ', " ", d)}"
 
 require ccsp_common.inc
 
@@ -31,6 +32,8 @@ CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC
 CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', ' -DFEATURE_RDKB_WAN_MANAGER', '', d)}"
 LDFLAGS_append_dunfell = " -lrt"
 
+EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' --enable-wanfailover ', '', d)}"
+
 CFLAGS_append = " \
     -I${STAGING_INCDIR} \
     -I${STAGING_INCDIR}/dbus-1.0 \
@@ -41,6 +44,8 @@ CFLAGS_append = " \
     -I${STAGING_INCDIR}/ulog \
     -I${STAGING_INCDIR}/syscfg \
     "
+CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' -I=${includedir}/rbus ', '', d)}"
+
 
 LDFLAGS_append = " \
     -lccsp_common \
@@ -50,6 +55,8 @@ LDFLAGS_append = " \
     -lrt \
     -lprivilege \
     "
+LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' -lrbus ', '', d)}"
+
 do_compile_prepend () {
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'true', 'false', d)}; then
     		sed -i '2i <?define FEATURE_RDKB_WAN_MANAGER=True?>' ${S}/config/TR181-EthAgent.xml
