@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 RPROVIDES_${PN} = "ccsp-p-and-m"
 
 DEPENDS = "ccsp-common-library webconfig-framework ccsp-lm-lite telemetry ccsp-hotspot"
-DEPENDS_append = " utopia hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi curl ccsp-misc ccsp-hotspot cjson libsyswrapper cjson trower-base64 msgpack-c nanomsg wrp-c libparodus"
+DEPENDS_append = " utopia hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi curl ccsp-misc ccsp-hotspot cjson libsyswrapper cjson trower-base64 msgpack-c nanomsg wrp-c libparodus rbus"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'fwupgrade_manager', ' hal-fwupgrade', '',d)}"
-
+ 
 RDEPENDS_${PN}_append = " cjson trower-base64 msgpack-c nanomsg wrp-c libparodus "
 
 RDEPENDS_${PN}-ccsp_append_dunfell = " bash"
@@ -64,6 +64,7 @@ CFLAGS_append = " \
     -I${STAGING_INCDIR}/msgpackc \
     -I${STAGING_INCDIR}/libparodus \
     -I${STAGING_INCDIR}/cjson \
+    -I${STAGING_INCDIR}/rbus \
     "
 
 EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-notify', '', d)}"
@@ -93,6 +94,7 @@ LDFLAGS_append = " \
     -lrt \
     -lsysevent \
     -ltelemetry_msgsender \
+    -lrbus \
 "
 
 LDFLAGS_append_dunfell = " -lsyscfg"

@@ -90,6 +90,8 @@ CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'nat46', '-DFEATURE_S
 # Adding flag for wan failover
 CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' -DWAN_FAILOVER_SUPPORTED', '', d)}"
 
+# Adding Flag for support extender + secondary wan.
+CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_extender', '-DRDKB_EXTENDER_ENABLED', '', d)}"
 
 FILES_${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""

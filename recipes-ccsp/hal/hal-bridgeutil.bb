@@ -19,4 +19,6 @@ S = "${WORKDIR}/git/source/bridgeutil"
 
 CFLAGS_append = " -I=${includedir}/ccsp "
 
+CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_extender', '-DRDKB_EXTENDER_ENABLED', '', d)}"
+
 inherit autotools coverity

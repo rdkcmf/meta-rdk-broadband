@@ -81,6 +81,13 @@ do_install() {
              install -m 0644 ${S}/ocsp-support.service ${D}${systemd_unitdir}/system
         fi
         install -m 0755 ${S}/ocsp-support.sh ${D}${base_libdir}/rdk/
+
+    	if ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', 'true', 'false', d)}; then
+        	echo "WanFailOverSupportEnable=true" >> ${D}${sysconfdir}/device.properties
+    	fi
+    	if ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_extender', 'true', 'false', d)}; then
+       		echo "rdkb_extender=true" >> ${D}${sysconfdir}/device.properties
+    	fi
 }
 
 do_install_append_qemux86broadband() {
