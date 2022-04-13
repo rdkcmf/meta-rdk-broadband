@@ -4,7 +4,7 @@
 
 SUMMARY = "USP Pa component"
 DESCRIPTION = "Agent for USP protocol"
-DEPENDS = "openssl sqlite3 curl zlib ccsp-common-library"
+DEPENDS = "openssl sqlite3 curl zlib ccsp-common-library mosquitto libwebsockets"
 LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=b612eeb51efab2203cc9a982e9530c8a"
 
@@ -12,19 +12,20 @@ require recipes-ccsp/ccsp/ccsp_common.inc
 
 
 # OBUSPA is the reference USP agent codebase
-OBUSPA_REL="4.1.0"
+OBUSPA_REL="5.0.0"
 SRC_URI = "https://github.com/BroadbandForum/obuspa/archive/v${OBUSPA_REL}-master.tar.gz;name=obuspa"
-SRC_URI[obuspa.md5sum] = "b709d54f08aa528b73d435d71717f34f"
+SRC_URI[obuspa.md5sum] = "67f30b5d99b7280beff900d9b5d9f02f"
 
 # USPPA is the RDK specializations
 SRC_URI += "git://github.com/rdkcentral/usp-pa-vendor-rdk;protocol=http;branch=main;name=usppa"
-SRCREV_usppa = "c2a275ee27eb86a7df128ce790a50ef42cccc5da"
+SRCREV_usppa = "81738960df8af349a0532d9b989dd14a671ed5bb"
+
 
 # Patches for OBUSPA
-#SRC_URI += "file://patches/example.patch"
+SRC_URI += "file://patches/remove_duplicate_min_max_define.patch"
 
 # Configure options for OBUSPA
-EXTRA_OECONF += "--disable-mqtt"
+EXTRA_OECONF += "--enable-websockets --enable-mqtt"
 
 # Configuration files for target
 SRC_URI += "file://conf/usp_factory_reset.conf"
