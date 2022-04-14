@@ -55,7 +55,9 @@ LDFLAGS_append = " \
     -lrt \
     -lprivilege \
     "
+
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' -lrbus ', '', d)}"
+LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' -lsysevent ', '', d)}"
 
 do_compile_prepend () {
 	if ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_wan_manager', 'true', 'false', d)}; then
