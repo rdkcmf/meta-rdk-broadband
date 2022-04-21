@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/belvedere-yocto/CcspLMLite"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
-DEPENDS = "ccsp-common-library utopia avro-c msgpack-c trower-base64 util-linux curl libxml2 wrp-c nanomsg libparodus telemetry libsyswrapper libunpriv"
+DEPENDS = "ccsp-common-library utopia avro-c msgpack-c trower-base64 util-linux curl libxml2 wrp-c nanomsg libparodus telemetry libsyswrapper libunpriv hal-platform"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 require ccsp_common.inc
 
@@ -37,6 +37,7 @@ LDFLAGS_append = " \
     -lxml2 \
     -ldbus-1 \
     -lprivilege \
+    -lhal_platform \
     "
 
 EXTRA_OECONF_append = "${@bb.utils.contains("DISTRO_FEATURES", "seshat", " --enable-seshat ", " ", d)}"
