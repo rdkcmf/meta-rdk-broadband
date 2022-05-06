@@ -210,17 +210,28 @@
                    }
                  ]
                },
-	   {
-         "group_id": 14,
-         "subdocs": [
-           {
-             "name": "cellularconfig",
-             "bitposition": 1,
-             "support": false,
-             "version": "1.0"
-           }
-         ]
-       }
+			   {
+                 "group_id": 14,
+                 "subdocs": [
+                   {
+                     "name": "cellularconfig",
+                     "bitposition": 1,
+                     "support": false,
+                     "version": "1.0"
+                   }
+                 ]
+               },
+			   {
+                 "group_id": 15,
+                     "subdocs": [
+                   	       {
+                     		  "name": "gwfailover",
+                     		  "bitposition": 1,
+                     		  "support": false,
+                     		  "version": "1.0"
+                               }
+                            ]
+               }
              ],
     "arrisxb6" : [
               {
@@ -433,17 +444,28 @@
                                }
                             ]
                },
-	   {
-         "group_id": 14,
-         "subdocs": [
-           {
-             "name": "cellularconfig",
-             "bitposition": 1,
-             "support": false,
-             "version": "1.0"
-           }
-         ]
-       }
+		{
+                 "group_id": 14,
+	             "subdocs": [
+                               {
+                                  "name": "cellularconfig",
+                                  "bitposition": 1,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+		{
+                 "group_id": 15,
+                     "subdocs": [
+                   	       {
+                     		  "name": "gwfailover",
+                     		  "bitposition": 1,
+                     		  "support": false,
+                     		  "version": "1.0"
+                               }
+                            ]
+               }
              ],
 	"tchxb6" : [
               {
@@ -666,8 +688,19 @@
              "version": "1.0"
            }
          ]
-       }
-             ],
+       },
+	   {
+         "group_id": 15,
+         "subdocs": [
+            {
+              "name": "gwfailover",
+              "bitposition": 1,
+              "support": false,
+              "version": "1.0"
+            }
+          ]
+        }
+       ],
     "xf3" : [
               {
                  "group_id": 1,
@@ -889,7 +922,18 @@
              "version": "1.0"
            }
          ]
-       }
+       },
+	 {
+        "group_id": 15,
+        "subdocs": [
+          {
+            "name": "gwfailover",
+            "bitposition": 1,
+            "support": false,
+            "version": "1.0"
+          }
+        ]
+      }
              ],
     "arrisxb7" : [
               {
@@ -1112,7 +1156,18 @@
              "version": "1.0"
            }
          ]
-       }
+       },
+	 {
+        "group_id": 15,
+        "subdocs": [
+          {
+            "name": "gwfailover",
+            "bitposition": 1,
+            "support": true,
+            "version": "1.0"
+          }
+        ]
+      }
              ],
 	"tchxb7" : [
               {
@@ -1325,17 +1380,28 @@
                                }
                             ]
                },
-	   {
-         "group_id": 14,
-         "subdocs": [
-           {
-             "name": "cellularconfig",
-             "bitposition": 1,
-             "support": false,
-             "version": "1.0"
-           }
-         ]
-       }
+			   {
+                 "group_id": 14,
+	             "subdocs": [
+                               {
+                                  "name": "cellularconfig",
+                                  "bitposition": 1,
+                                  "support": false,
+                                  "version": "1.0"
+                               }
+                            ]
+               },
+			   {
+                 "group_id": 15,
+                     "subdocs": [
+                   	       {
+                     		  "name": "gwfailover",
+                     		  "bitposition": 1,
+                     		  "support": true,
+                     		  "version": "1.0"
+                               }
+                            ]
+               }
              ],
     "xb8" : [
               {
@@ -1548,17 +1614,28 @@
                    }
                  ]
                },
-	   {
-         "group_id": 14,
-         "subdocs": [
-           {
-             "name": "cellularconfig",
-             "bitposition": 1,
-             "support": false,
-             "version": "1.0"
-           }
-         ]
-       }
+			   {
+                 "group_id": 14,
+                 "subdocs": [
+                   {
+                     "name": "cellularconfig",
+                     "bitposition": 1,
+                     "support": false,
+                     "version": "1.0"
+                   }
+                 ]
+               },
+			   {
+                 "group_id": 15,
+                 "subdocs": [
+                   {
+                     "name": "gwfailover",
+                     "bitposition": 1,
+                     "support": true,
+                     "version": "1.0"
+                   }
+                 ]
+               }
              ],
     "cbr" : [
               {
@@ -1776,6 +1853,17 @@
          "subdocs": [
            {
              "name": "cellularconfig",
+             "bitposition": 1,
+             "support": false,
+             "version": "1.0"
+           }
+         ]
+       },
+	   {
+         "group_id": 15,
+         "subdocs": [
+           {
+             "name": "gwfailover",
              "bitposition": 1,
              "support": false,
              "version": "1.0"
@@ -2004,6 +2092,17 @@
              "version": "1.0"
            }
          ]
+       },
+	   {
+         "group_id": 15,
+         "subdocs": [
+           {
+              "name": "gwfailover",
+              "bitposition": 1,
+              "support": false,
+              "version": "1.0"
+           }
+         ]
        }
      ],
      "sr300" : [
@@ -2225,6 +2324,17 @@
              "bitposition": 1,
              "support": false,
              "version": "1.0"
+           }
+         ]
+       },
+           {
+         "group_id": 15,
+         "subdocs": [
+           {
+             "name": "gwfailover",
+              "bitposition": 1,
+              "support": false,
+              "version": "1.0"
            }
          ]
        }
@@ -2450,8 +2560,19 @@
              "version": "1.0"
            }
          ]
-       }
-            ],
+       },
+	   {
+        "group_id": 15,
+        "subdocs": [
+          {
+             "name": "gwfailover",
+             "bitposition": 1,
+             "support": true,
+             "version": "1.0"
+          }
+        ]
+      }
+    ],
    "skyse501" : [
                   {
                      "group_id": 1,
@@ -2673,8 +2794,19 @@
              "version": "1.0"
            }
          ]
-       }
-                 ],
+       },
+       {
+        "group_id": 15,
+        "subdocs": [
+          {
+            "name": "gwfailover",
+            "bitposition": 1,
+            "support": false,
+            "version": "1.0"
+          }
+        ]
+      }
+    ],
 "skysr213" : [
       {
          "group_id": 1,
@@ -2897,7 +3029,6 @@
            }
          ]
        }
-     ]
-
+    ]
  }
 
