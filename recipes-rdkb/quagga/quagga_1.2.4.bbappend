@@ -16,7 +16,6 @@ RDEPENDS_${PN}_remove = "${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-r
 
 do_install_append() {
     rm -rf ${D}${base_libdir}
-    rm -r ${D}${sysconfdir}/quagga/ripd.conf.sample
-    rm -r ${D}${sysconfdir}/quagga/ripngd.conf.sample
+    rm -r ${D}${sysconfdir}/quagga/*.conf.sample
 }
 
