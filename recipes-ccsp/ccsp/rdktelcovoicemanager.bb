@@ -66,11 +66,12 @@ do_install_append () {
     #JSON schema file
     install -d ${D}/${sysconfdir}/rdk/schemas
     ln -sf ${bindir}/telcovoice_manager ${D}${exec_prefix}/rdk/voicemanager/telcovoice_manager
-    install -m 644 ${S}/source/TR-181/integration_src.shared/VoiceDiagnostics.avsc ${D}/usr/ccsp/harvester/
 if [ ${ISRDKB_VOICE_DM_TR104_V2} = "true" ]; then
+    install -m 644 ${S}/source/TR-181/integration_src.shared/VoiceDiagnostics_V2.avsc ${D}/usr/ccsp/harvester/VoiceDiagnostics.avsc
     install -m 644 ${S}/config/RdkTelcoVoiceManager_v2.xml ${D}/usr/rdk/voicemanager/RdkTelcoVoiceManager.xml
     install -m 644 ${S}/hal_schema/telcovoice_hal_schema_v2.json ${D}/${sysconfdir}/rdk/schemas/telcovoice_hal_schema.json
 else
+    install -m 644 ${S}/source/TR-181/integration_src.shared/VoiceDiagnostics.avsc ${D}/usr/ccsp/harvester/
     install -m 644 ${S}/config/RdkTelcoVoiceManager_v1.xml ${D}/usr/rdk/voicemanager/RdkTelcoVoiceManager.xml
     install -m 644 ${S}/hal_schema/telcovoice_hal_schema_v1.json ${D}/${sysconfdir}/rdk/schemas/telcovoice_hal_schema.json
 fi
