@@ -3,7 +3,7 @@ SUMMARY = "RDK Cellular Manager component"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library rdk-logger utopia libunpriv halinterface glib-2.0 libqmi libgudev"
+DEPENDS = "ccsp-common-library rdk-logger utopia libunpriv halinterface glib-2.0 libqmi webconfig-framework curl trower-base64 msgpack-c libgudev"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
 SRC_URI ="${RDKB_CCSP_ROOT_GIT}/RdkCellularManager/generic;protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=CellularManager"
@@ -28,6 +28,8 @@ CFLAGS_append = " \
     -I${STAGING_INCDIR}/glib-2.0 \
     -I${STAGING_LIBDIR}/glib-2.0/include \
     -I${STAGING_INCDIR}/libqmi-glib \
+    -I${STAGING_INCDIR}/trower-base64 \
+    -I${STAGING_INCDIR}/msgpackc \
     "
 LDFLAGS += " -lprivilege"
 LDFLAGS_append_dunfell = " -ldbus-1"
