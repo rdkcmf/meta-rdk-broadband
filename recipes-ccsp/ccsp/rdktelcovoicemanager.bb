@@ -37,6 +37,7 @@ CFLAGS_append = " \
     "
 
 CFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_voice_manager_dmltr104_v2','-DFEATURE_RDKB_VOICE_DM_TR104_V2=ON','', d)}"
+CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', '-DRBUS_BUILD_FLAG_ENABLE', '', d)}"
 
 LDFLAGS_append = " \
     -ldbus-1 \
