@@ -103,6 +103,8 @@ CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', '-DRDK_ONE
 
 # Adding flag for DHCP Manager
 CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'dhcp_manager', '-DFEATURE_RDKB_DHCP_MANAGER', '', d)}"
+# Adding flag for gateway fail over
+CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'gateway_manager', ' -DGATEWAY_FAILOVER_SUPPORTED ', '', d)}"
 
 FILES_${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""

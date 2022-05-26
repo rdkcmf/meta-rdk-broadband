@@ -37,7 +37,7 @@ inherit breakpad-wrapper
 DEPENDS += "breakpad breakpad-wrapper"
 BREAKPAD_BIN_append = " psmcli"
 
-LDFLAGS += "-lbreakpadwrapper -lpthread -lstdc++"
+LDFLAGS += "-lbreakpadwrapper -lpthread -lstdc++ -lrt"
 
 CFLAGS_append = " \
     -I${STAGING_INCDIR}/dbus-1.0 \

@@ -20,7 +20,7 @@ SUMMARY = "This receipe provides gateway manager support."
 SECTION = "console/utils"
 LICENSE = "CLOSED"
 
-DEPENDS = "ccsp-common-library dbus rdk-logger hal-platform util-linux utopia libunpriv rbus webconfig-framework curl trower-base64 msgpack-c"
+DEPENDS = "ccsp-common-library dbus rdk-logger hal-platform util-linux utopia libunpriv jansson rbus webconfig-framework curl trower-base64 msgpack-c"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
 require recipes-ccsp/ccsp/ccsp_common.inc
@@ -32,7 +32,7 @@ SRCREV_FORMAT = "GatewayManager"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 S = "${WORKDIR}/git"
 
-inherit autotools systemd
+inherit autotools systemd breakpad-logmapper
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
 
@@ -45,6 +45,11 @@ LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'safec dunfell', ' -ls
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 
 EXTRA_OECONF_append = " --enable-rbus_only_gwmgr"
+
+# Breakpad processname and logfile mapping
+BREAKPAD_LOGMAPPER_PROCLIST = "gateway_manager"
+BREAKPAD_LOGMAPPER_LOGLIST = "GatewayManagerLog.txt.0"
+
 
 CFLAGS_append = " \
     -I=${includedir}/dbus-1.0 \
@@ -63,6 +68,9 @@ LDFLAGS_append = " \
     -lsyscfg \
     -lprivilege \
     -lrbus \
+    -lrt \
+    -lpthread \
+    -lbreakpadwrapper \
     "
 do_install_append () {
     # Config files and scripts
@@ -77,6 +85,7 @@ FILES_${PN} += " \
     /usr/bin/* \
         ${systemd_unitdir}/system/GatewayManager.service \
 "
+
 
 
 
