@@ -32,5 +32,5 @@ FILES_${PN}_append = " \
     ${sysconfdir}/Default_T2_ReportProfile.json \
 "
 
-EXTRA_OECONF += " --enable-ccspsupport"
+EXTRA_OECONF += " --enable-ccspsupport --enable-libsyswrapper"
 EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '--enable-gtestapp', '', d)}"
