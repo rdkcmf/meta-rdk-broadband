@@ -88,7 +88,7 @@ CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_inter_device_m
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'nat46', '-DFEATURE_SUPPORT_MAPT_NAT46', '', d)}"
 
 # Adding flag for wan failover
-CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' -DWAN_FAILOVER_SUPPORTED', '', d)}"
+CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' -DWAN_FAILOVER_SUPPORTED -DRBUS_BUILD_FLAG_ENABLE', '', d)}"
 
 # Adding flag for EasyMesh Controller
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'easymesh-controller', '-DFEATURE_SUPPORT_EASYMESH_CONTROLLER', '', d)}"

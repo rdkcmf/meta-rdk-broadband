@@ -3,7 +3,7 @@ SUMMARY = "RDK Cellular Manager component"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
 
-DEPENDS = "ccsp-common-library rdk-logger utopia libunpriv halinterface glib-2.0 libqmi webconfig-framework curl trower-base64 msgpack-c libgudev"
+DEPENDS = "ccsp-common-library rdk-logger utopia libunpriv halinterface glib-2.0 libqmi webconfig-framework curl trower-base64 msgpack-c libgudev rbus rtmessage"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 
 SRC_URI ="${RDKB_CCSP_ROOT_GIT}/RdkCellularManager/generic;protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=CellularManager"
@@ -17,7 +17,7 @@ S = "${WORKDIR}/git"
 
 require ccsp_common.inc
 
-inherit autotools pkgconfig systemd
+inherit autotools pkgconfig systemd pythonnative
 
 CFLAGS_append = " \
     -I${STAGING_INCDIR} \
@@ -41,6 +41,16 @@ LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'safec dunfell', ' -ls
 PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 SYSTEMD_SERVICE_${PN} = "RdkCellularManager.service"
+
+do_compile_prepend () {
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', 'true', 'false', d)}; then
+    sed -i '2i <?define RBUS_BUILD_FLAG_ENABLE=True?>' ${S}/config/RdkCellularManager.xml
+    fi
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', 'true', 'false', d)}; then
+        (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config/RdkCellularManager.xml ${S}/source/CellularManager/dm_pack_datamodel.c)
+    fi
+}
 
 do_install_append () {
     # Config files and scripts
