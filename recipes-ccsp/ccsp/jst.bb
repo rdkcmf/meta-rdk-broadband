@@ -25,8 +25,8 @@ do_install_append() {
  install -d ${D}/usr/www2/includes
  install -d ${D}/usr/video_analytics
  install -m 755 ${S}/jsts/php.jst ${D}/usr/www2/includes
- install -m 755 ${S}/jsts/jst_prefix.js ${D}/usr/www2/
- install -m 755 ${S}/jsts/jst_suffix.js ${D}/usr/www2/
+
+
  install -m 755 ${S}/jsts/php.jst ${D}/usr/video_analytics/
  install -m 755 ${S}/jsts/jst_prefix.js ${D}/usr/video_analytics/
  install -m 755 ${S}/jsts/jst_suffix.js ${D}/usr/video_analytics/
