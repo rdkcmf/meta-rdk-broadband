@@ -11,10 +11,10 @@ Signed-off-by: shilpa_seshadri@cable.comcast.com
 diff --git a/source/arch/intel_usg/boards/rdkb_atom/config/comcast/WebpaAgent.xml b/source/arch/intel_usg/boards/rdkb_atom/config/comcast/WebpaAgent.xml
 --- a/source/arch/intel_usg/boards/rdkb_atom/config/comcast/WebpaAgent.xml
 +++ b/source/arch/intel_usg/boards/rdkb_atom/config/comcast/WebpaAgent.xml
-@@ -80,5 +80,71 @@
+@@ -127,5 +127,71 @@
                  </object>
              </objects>
-         </object>
+         </object>	    
 +        <object>
 +            <name>X_RDK_WebConfig</name>
 +            <objectType>object</objectType>

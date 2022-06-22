@@ -13,7 +13,7 @@ RDEPENDS_${PN}_append = "${@bb.utils.contains("DISTRO_FEATURES", "webconfig_phas
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=e3fc50a88d0a364313df4b21ef20c29e"
 
-SRCREV = "${@bb.utils.contains("DISTRO_FEATURES", "webconfig_phase1", "d26d16eb4a85348404259178a48bfcdc49830463", "6a294c9d20718dd390dd3c5f3db1efffb56128df", d)}"
+SRCREV = "${@bb.utils.contains("DISTRO_FEATURES", "webconfig_phase1", "d26d16eb4a85348404259178a48bfcdc49830463", "e650f4b447f150083a72af4025011b05f181de47", d)}"
 
 do_configure_prepend () {
     (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/source/arch/intel_usg/boards/rdkb_atom/config/comcast/WebpaAgent.xml ${S}/source/broadband/dm_pack_datamodel.c)
@@ -53,7 +53,7 @@ CFLAGS_append = " \
 
 CFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "webconfig", "-I${STAGING_INCDIR}/webcfg ", " ", d)}"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_bin', '-DWEBCONFIG_BIN_SUPPORT', '', d)}"
-
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', '-DFEATURE_SUPPORT_ONEWIFI', '', d)}"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'Support_6G_Radio', '-DFEATURE_SUPPORT_6G_RADIO', '', d)}"
 
 CFLAGS_remove = " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_bin', ' -DFEATURE_SUPPORT_WEBCONFIG ', '', d)}"
