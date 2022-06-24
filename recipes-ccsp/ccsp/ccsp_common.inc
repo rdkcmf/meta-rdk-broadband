@@ -93,6 +93,8 @@ CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportE
 # Adding Flag for support extender + secondary wan.
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_extender', '-DRDKB_EXTENDER_ENABLED', '', d)}"
 
+CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', '-DRDK_ONEWIFI', '', d)}"
+
 FILES_${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP_${PN} += "dev-so"
