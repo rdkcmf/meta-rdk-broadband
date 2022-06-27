@@ -63,6 +63,7 @@ LDFLAGS_append = " \
     -llibparodus \
     -ltelemetry_msgsender \
     -lrbus \
+    -lwifi_webconfig \
 "
 LDFLAGS_append += " -lprivilege"
 
