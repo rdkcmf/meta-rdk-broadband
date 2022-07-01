@@ -190,6 +190,12 @@
                      "bitposition": 1,
                      "support": false,
                      "version": "1.0"
+                   },
+                   {
+                       "name": "wanfailover",
+                       "bitposition": 2,
+                       "support": false,
+                       "version": "1.0"
                    }
                  ]
                },
@@ -407,6 +413,12 @@
                      "bitposition": 1,
                      "support": false,
                      "version": "1.0"
+                   },
+                   {
+                       "name": "wanfailover",
+                       "bitposition": 2,
+                       "support": false,
+                       "version": "1.0"
                    }
                  ]
                },
@@ -624,6 +636,12 @@
                      "bitposition": 1,
                      "support": false,
                      "version": "1.0"
+                   },
+                   {
+                       "name": "wanfailover",
+                       "bitposition": 2,
+                       "support": false,
+                       "version": "1.0"
                    }
                  ]
                },
@@ -841,6 +859,12 @@
                      "bitposition": 1,
                      "support": false,
                      "version": "1.0"
+                   },
+                   {
+                       "name": "wanfailover",
+                       "bitposition": 2,
+                       "support": false,
+                       "version": "1.0"
                    }
                  ]
                },
@@ -1058,6 +1082,12 @@
                      "bitposition": 1,
                      "support": false,
                      "version": "1.0"
+                   },
+                   {
+                       "name": "wanfailover",
+                       "bitposition": 2,
+                       "support": true,
+                       "version": "1.0"
                    }
                  ]
                },
@@ -1275,6 +1305,12 @@
                      "bitposition": 1,
                      "support": false,
                      "version": "1.0"
+                   },
+                   {
+                       "name": "wanfailover",
+                       "bitposition": 2,
+                       "support": true,
+                       "version": "1.0"
                    }
                  ]
                },
@@ -1492,6 +1528,12 @@
                      "bitposition": 1,
                      "support": false,
                      "version": "1.0"
+                   },
+                   {
+                       "name": "wanfailover",
+                       "bitposition": 2,
+                       "support": true,
+                       "version": "1.0"
                    }
                  ]
                },
@@ -1709,6 +1751,12 @@
                      "bitposition": 1,
                      "support": false,
                      "version": "1.0"
+                   },
+                   {
+                       "name": "wanfailover",
+                       "bitposition": 2,
+                       "support": false,
+                       "version": "1.0"
                    }
                  ]
                },
@@ -1926,6 +1974,12 @@
              "bitposition": 1,
              "support": true,
              "version": "1.0"
+           },
+           {
+               "name": "wanfailover",
+               "bitposition": 2,
+               "support": false,
+               "version": "1.0"
            }
          ]
        },
@@ -2143,6 +2197,12 @@
              "bitposition": 1,
              "support": true,
              "version": "1.0"
+           },
+           {
+               "name": "wanfailover",
+               "bitposition": 2,
+               "support": true,
+               "version": "1.0"
            }
          ]
        },
@@ -2360,6 +2420,12 @@
                     "bitposition": 1,
                     "support": true,
                     "version": "1.0"
+                  },
+                  {
+                      "name": "wanfailover",
+                      "bitposition": 2,
+                      "support": true,
+                      "version": "1.0"
                   }
                 ]
               },
@@ -2577,6 +2643,12 @@
                          "bitposition": 1,
                          "support": true,
                          "version": "1.0"
+                       },
+                       {
+                           "name": "wanfailover",
+                           "bitposition": 2,
+                           "support": true,
+                           "version": "1.0"
                        }
                      ]
                    },
