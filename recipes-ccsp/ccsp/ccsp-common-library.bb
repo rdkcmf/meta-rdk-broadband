@@ -91,9 +91,6 @@ do_install_append_class-target () {
     # RBUS related scripts
     install -d ${D}/lib/rdk
     install -m 777 ${S}/scripts/rbus_termination_handler.sh ${D}/lib/rdk/rbus_termination_handler.sh
-    install -m 777 ${S}/scripts/rbusFlagSync.sh ${D}/usr/ccsp/rbusFlagSync.sh
-    install -m 777 ${S}/scripts/rbus_status_logger.sh ${D}/usr/ccsp/rbus_status_logger.sh
-    install -m 777 ${S}/scripts/rbus_rfc_handler.sh ${D}/lib/rdk/rbus_rfc_handler.sh
     install -m 777 ${S}/systemd_units/scripts/parodusStartCheck.sh ${D}/usr/ccsp/parodusStartCheck.sh
 }
 
@@ -131,10 +128,7 @@ FILES_${PN}-dbg = " \
 "
 
 FILES_${PN}_append = " \
-                     /usr/ccsp/rbusFlagSync.sh \
-                     /usr/ccsp/rbus_status_logger.sh \
                      /lib/rdk/rbus_termination_handler.sh \
-                     /lib/rdk/rbus_rfc_handler.sh \
 		     /usr/ccsp/parodusStartCheck.sh \
                       "
 
