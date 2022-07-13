@@ -8,10 +8,10 @@ HOMEPAGE = "http://github.com/belvedere-yocto/OneWifi"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=042d68aa6c083a648f58bb8d224a4d31"
-
-DEPENDS = "ccsp-common-library webconfig-framework hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi utopia libparodus avro-c telemetry libsyswrapper libev rbus libnl ccsp-one-wifi-libwebconfig"
+DEPENDS = "hal-wifi webconfig-framework telemetry libsyswrapper libev rbus libnl ccsp-one-wifi-libwebconfig"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
+#DEPENDS_append = " hal-cm  hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi avro-c "
 
 CFLAGS_prepend += "-I${PKG_CONFIG_SYSROOT_DIR}/usr/include/libnl3 "
 CFLAGS_prepend += "-I${PKG_CONFIG_SYSROOT_DIR}/usr/include/ "
@@ -21,13 +21,10 @@ CFLAGS_append = " \
 
 DEPENDS_append += " libunpriv"
 
-RDEPENDS_${PN}_append = " libparodus "
-
 CFLAGS += " -Wall -Werror -Wextra -Wno-implicit-function-declaration -Wno-type-limits -Wno-unused-parameter "
 
 CFLAGS_append_dunfell = " -Wno-format-overflow -Wno-format-truncation -Wno-address-of-packed-member -Wno-tautological-compare -Wno-stringop-truncation "
 
-require ccsp_common.inc
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/OneWifi;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=OneWifi"
 
 SRCREV_OneWifi = "${AUTOREV}"
@@ -49,27 +46,18 @@ EXTRA_OECONF_append = " --disable-libwebconfig"
 EXTRA_OECONF_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--enable-notify', '', d)}"
 ISSYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
 CFLAGS_append = " \
-    -I${STAGING_INCDIR}/dbus-1.0 \
-    -I${STAGING_LIBDIR}/dbus-1.0/include \
     -I${STAGING_INCDIR}/ccsp \
-    -I${STAGING_INCDIR}/libparodus \
     -I=${includedir}/rbus \
 "
 
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'meshwifi', '-DENABLE_FEATURE_MESHWIFI', '', d)}"
-
 LDFLAGS_append = " \
-    -ldbus-1 \
-    -llibparodus \
     -ltelemetry_msgsender \
     -lrbus \
     -lwifi_webconfig \
 "
 LDFLAGS_append += " -lprivilege"
-
-do_compile_prepend () {
-    (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config/TR181-WiFi-USGv2.XML ${S}/source/dml/wifi_ssp/dm_pack_datamodel.c)
-}
+#LDFLAGS_append = " -L${PKG_CONFIG_SYSROOT_DIR}/usr/opensync/lib -low -losw -lopensync"
 
 do_install_append () {
     # Config files and scripts
@@ -103,12 +91,6 @@ do_install_append () {
     install -d ${D}/usr/include/middle_layer_src/wifi
     install -m 644 ${S}/source/dml/tr_181/sbapi/*.h ${D}/usr/include/ccsp
     install -m 644 ${S}/include/tr_181/ml/*.h ${D}/usr/include/middle_layer_src/wifi
-    install -m 644 ${S}/include/webconfig_external_proto_ovsdb.h  ${D}/usr/include/ccsp
-    install -m 644 ${S}/include/webconfig_external_proto.h  ${D}/usr/include/ccsp
-    install -m 644 ${S}/include/webconfig_external_proto_tr181.h  ${D}/usr/include/ccsp
-    install -m 644 ${S}/include/wifi_webconfig.h       ${D}/usr/include/ccsp
-    install -m 644 ${S}/include/wifi_base.h       ${D}/usr/include/ccsp
-
 
 	if [ ${ISSYSTEMD} = "true" ]; then
     	install -d ${D}${systemd_unitdir}/system
