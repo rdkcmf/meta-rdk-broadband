@@ -40,7 +40,6 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}${exec_prefix}/rdk/interdevicemanager
     ln -sf ${bindir}/interdevicemanager ${D}${exec_prefix}/rdk/interdevicemanager/interdevicemanager
-    install -m 644 ${S}/config/RdkInterDeviceManager.xml ${D}${exec_prefix}/rdk/interdevicemanager/
 
     #Install systemd unit.
     install -d ${D}${systemd_unitdir}/system
