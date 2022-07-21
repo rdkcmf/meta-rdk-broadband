@@ -34,6 +34,8 @@ SRCREV_FORMAT = "${AUTOREV}"
 inherit autotools
 inherit autotools pythonnative
 
+ENABLE_MAPT = "--enable-maptsupport=${@bb.utils.contains('DISTRO_FEATURES', 'nat46', 'yes', 'no', d)}"
+EXTRA_OECONF_append = " ${ENABLE_MAPT}"
 
 #PACKAGECONFIG ?= "dropearly"
 #PACKAGECONFIG[dropearly] = "--enable-dropearly,--disable-dropearly"
