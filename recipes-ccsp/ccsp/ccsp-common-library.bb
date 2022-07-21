@@ -14,8 +14,7 @@ require ccsp_common.inc
 
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/CcspCommonLibrary;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH}"
 
-SRC_URI_append_dunfell = " file://0001-DBusLoop-SSL_state-TLS_ST_OK.patch \
-			   file://0001-SSLeay_add_all_algorithms-remove-in-openssl-1.1.patch"
+SRC_URI_append_dunfell = " file://0001-DBusLoop-SSL_state-TLS_ST_OK.patch"
 
 SRCREV = "${AUTOREV}"
 SRCREV_FORMAT = "${AUTOREV}"
