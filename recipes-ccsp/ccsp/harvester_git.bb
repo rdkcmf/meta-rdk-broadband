@@ -1,5 +1,6 @@
 DEPENDS = "ccsp-common-library rdk-logger avro-c trower-base64 hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi msgpackc dbus util-linux utopia wrp-c nanomsg libparodus "
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
+DEPENDS_append = "${@bb.utils.contains("DISTRO_FEATURES", "OneWifi", " rbus rbus-core ", " ", d)}"
 require recipes-ccsp/ccsp/ccsp_common.inc
 
 RDEPENDS_${PN} += "avro-c trower-base64 rdk-logger msgpackc util-linux utopia "
@@ -62,6 +63,11 @@ CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-confi
 
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
+LDFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "OneWifi", " -lrbus -lrbus-core -lrtMessage ", " ", d)}"
+CFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "OneWifi", " -I${STAGING_INCDIR}/rbus -I${STAGING_INCDIR}/rbus-core -I${STAGING_INCDIR}/rtmessage ", " ", d)}"
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'OneWifi', '-DRDK_ONEWIFI', '', d)}"
+
+EXTRA_OECONF += "${@bb.utils.contains("DISTRO_FEATURES", "OneWifi", " --enable-rdkOneWifi=yes ", " ", d)}"
 
 do_compile_prepend(){
 	(python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config-atom/Harvester.XML ${S}/source/HarvesterSsp/dm_pack_datamodel.c)
