@@ -46,7 +46,7 @@ CFLAGS_append = " \
     -I${STAGING_INCDIR}/syscfg \
     "
 CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' -I=${includedir}/rbus ', '', d)}"
-
+CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'RbusBuildFlagEnable', ' -I=${includedir}/rbus ', '', d)}"
 
 LDFLAGS_append = " \
     -lccsp_common \
@@ -57,6 +57,7 @@ LDFLAGS_append = " \
     -lprivilege \
     "
 
+LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'RbusBuildFlagEnable', ' -lrbus ', '', d)}"
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' -lrbus ', '', d)}"
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportEnable', ' -lsysevent ', '', d)}"
 

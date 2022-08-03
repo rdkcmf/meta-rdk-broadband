@@ -93,6 +93,9 @@ CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'WanFailOverSupportE
 # Adding flag for EasyMesh Controller
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'easymesh-controller', '-DFEATURE_SUPPORT_EASYMESH_CONTROLLER', '', d)}"
 
+# Adding flag for Rbus Build Flag
+CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'RbusBuildFlagEnable', ' -DRBUS_BUILD_FLAG_ENABLE', '', d)}"
+
 # Adding Flag for support extender + secondary wan.
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_extender', '-DRDKB_EXTENDER_ENABLED', '', d)}"
 
