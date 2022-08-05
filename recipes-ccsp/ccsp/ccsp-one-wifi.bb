@@ -94,6 +94,7 @@ do_install_append () {
     install -m 664 ${S}/config/WifiSingleClient.avsc -t ${D}/usr/ccsp/wifi
     install -m 664 ${S}/config/WifiSingleClientActiveMeasurement.avsc -t ${D}/usr/ccsp/wifi
     install -m 664 ${S}/config/rdkb-wifi.ovsschema -t ${D}/usr/ccsp/wifi
+    install -m 755 ${D}/usr/bin/wifi_db_ovsh -t ${D}/usr/ccsp/wifi
     install -d ${D}/usr/include/ccsp
     install -d ${D}/usr/include/middle_layer_src
     install -d ${D}/usr/include/middle_layer_src/wifi
@@ -158,6 +159,7 @@ FILES_${PN} = "\
     ${prefix}/ccsp/wifi/WifiSingleClient.avsc \
     ${prefix}/ccsp/wifi/WifiSingleClientActiveMeasurement.avsc \
     ${prefix}/ccsp/wifi/rdkb-wifi.ovsschema \
+    ${prefix}/ccsp/wifi/wifi_db_ovsh \
 "
 
 FILES_${PN}-dbg = " \
