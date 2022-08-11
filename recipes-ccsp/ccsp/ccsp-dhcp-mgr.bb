@@ -89,3 +89,14 @@ FILES_${PN} += " \
     ${prefix}/ccsp/dhcpmgr/TR181-DHCPMgr.XML  \
     ${bindir}/* \
 "
+
+DEPENDS_append = " webconfig-framework trower-base64 msgpack-c "
+RDEPENDS_${PN}_append = " trower-base64 msgpack-c "
+CFLAGS_append = " \
+    -I${STAGING_INCDIR}/trower-base64 \
+    -I${STAGING_INCDIR}/msgpackc \
+"
+LDFLAGS_append = " \
+    -lmsgpackc \
+    -ltrower-base64 \
+"
