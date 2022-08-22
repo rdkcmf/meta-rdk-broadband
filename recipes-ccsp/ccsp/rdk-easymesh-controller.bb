@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM = " \
 
 DEPENDS = "ccsp-common-library dbus rdk-logger json-c libubox openssl zlib"
 
-require ccsp_common.inc
+require recipes-ccsp/ccsp/ccsp_common.inc
 
-SRC_URI =  "${CMF_GITHUB_ROOT}/RdkEasyMeshController;protocol=${CMF_GIT_PROTOCOL};branch=main;name=RdkEasyMeshController"
-SRC_URI += "${CMF_GITHUB_ROOT}/RdkEasyMeshControllerSSP;protocol=${CMF_GIT_PROTOCOL};branch=main;destsuffix=git/ssp;name=ssp"
+SRC_URI =  "${CMF_GITHUB_ROOT}/rdkb/components/opensource/ccsp/RdkEasyMeshController;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=RdkEasyMeshController"
+SRC_URI += "${CMF_GITHUB_ROOT}/rdkb/components/opensource/ccsp/RdkEasyMeshController/ssp;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};destsuffix=git/ssp;name=ssp"
 
 SRCREV_RdkEasyMeshController = "${AUTOREV}"
 SRCREV_ssp = "${AUTOREV}"
@@ -22,7 +22,7 @@ PV = "${RDK_RELEASE}+git${SRCPV}"
 S = "${WORKDIR}/git"
 
 # inherit cmake pkgconfig
-inherit autotools pkgconfig
+inherit autotools pkgconfig systemd
 
 CFLAGS_append = " \
     -I${STAGING_INCDIR} \
@@ -41,19 +41,24 @@ LDFLAGS_append = " \
     -lpthread \
     -L${STAGING_LIBDIR} -lubox \
 "
+ISSYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}"
 
 do_install_append () {
     # Config files and scripts
     install -d ${D}${exec_prefix}/ccsp/easymesh
     ln -sf ${bindir}/em-ctl ${D}${exec_prefix}/ccsp/easymesh/em-ctl
     install -m 644 ${S}/ssp/scripts/RdkEasyMeshController.xml ${D}${exec_prefix}/ccsp/easymesh/RdkEasyMeshController.xml
-    #if [ ${ISSYSTEMD} = "true" ]; then
-        #install -d ${D}${systemd_unitdir}/system
-        #install -D -m 0644 ${S}/scripts/RdkEasyMeshController.service ${D}${systemd_unitdir}/system/RdkEasyMeshController.service
-    #fi
+    if [ ${ISSYSTEMD} = "true" ]; then
+        install -d ${D}${systemd_unitdir}/system
+        install -D -m 0644 ${S}/scripts/RdkEasyMeshController.service ${D}${systemd_unitdir}/system/RdkEasyMeshController.service
+        install -D -m 0644 ${S}/scripts/RdkEasyMeshController.path ${D}${systemd_unitdir}/system/RdkEasyMeshController.path
+    fi
 }
 
+# This will automatically start the service on boot up.
+# It is unneeded as the service will start by the path unit upon CcspWiFiAgent initialization
 #SYSTEMD_SERVICE_${PN} += " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'RdkEasyMeshController.service', '', d)}"
+SYSTEMD_SERVICE_${PN} += " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'RdkEasyMeshController.path', '', d)}"
 
 FILES_${PN} += " \
     ${exec_prefix}/ccsp/easymesh/em-ctl \
@@ -61,4 +66,11 @@ FILES_${PN} += " \
     ${bindir}/* \
 "
 
-#FILES_${PN}_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_unitdir}/system/RdkEasyMeshController.service', '', d)}"
+FILES_${PN}_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_unitdir}/system/RdkEasyMeshController.service', '', d)}"
+FILES_${PN}_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '${systemd_unitdir}/system/RdkEasyMeshController.path', '', d)}"
+
+# Breakpad support
+inherit breakpad-wrapper
+DEPENDS += "breakpad breakpad-wrapper"
+BREAKPAD_BIN_append = " em_ctl map_cli"
+LDFLAGS += " -lbreakpadwrapper"
