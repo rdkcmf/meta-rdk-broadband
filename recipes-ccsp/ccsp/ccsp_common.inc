@@ -109,6 +109,9 @@ CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'dhcp_manager', '-DF
 # Adding flag for gateway fail over
 CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'gateway_manager', ' -DGATEWAY_FAILOVER_SUPPORTED ', '', d)}"
 
+# Adding flag for Configurable wan Interface
+CFLAGS_append  += " ${@bb.utils.contains('DISTRO_FEATURES', 'rdkb_configurable_wan_interface', '-DFEATURE_RDKB_CONFIGURABLE_WAN_INTERFACE', '', d)}"
+
 FILES_${PN} += "${libdir}/*.so"
 FILES_SOLIBSDEV = ""
 INSANE_SKIP_${PN} += "dev-so"
