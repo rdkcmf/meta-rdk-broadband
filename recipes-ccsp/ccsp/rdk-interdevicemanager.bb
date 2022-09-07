@@ -31,7 +31,7 @@ LDFLAGS += " -lprivilege"
 LDFLAGS_append_dunfell = " -ldbus-1"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-config --cflags libsafec`', '-fPIC', d)}"
 LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'safec dunfell', ' -lsafec-3.5.1 ', '', d)}"
-
+CFLAGS_prepend += " ${@bb.utils.contains('DISTRO_FEATURES', 'IDM_DEBUG',' -DIDM_DEBUG','', d)}"
 PACKAGES += "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 SYSTEMD_SERVICE_${PN} = "RdkInterDeviceManager.service"
@@ -40,7 +40,9 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}${exec_prefix}/rdk/interdevicemanager
     ln -sf ${bindir}/interdevicemanager ${D}${exec_prefix}/rdk/interdevicemanager/interdevicemanager
-
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'IDM_DEBUG','true','false', d)}; then
+    sed -i '/idm_certs.sh/d' ${S}/systemd_units/RdkInterDeviceManager.service
+    fi
     #Install systemd unit.
     install -d ${D}${systemd_unitdir}/system
     install -D -m 0644 ${S}/systemd_units/RdkInterDeviceManager.service ${D}${systemd_unitdir}/system/RdkInterDeviceManager.service
