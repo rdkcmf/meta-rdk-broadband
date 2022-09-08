@@ -91,6 +91,9 @@ do_install_append_class-target () {
     install -d ${D}/lib/rdk
     install -m 777 ${S}/scripts/rbus_termination_handler.sh ${D}/lib/rdk/rbus_termination_handler.sh
     install -m 777 ${S}/systemd_units/scripts/parodusStartCheck.sh ${D}/usr/ccsp/parodusStartCheck.sh
+
+    # gw_prov app sync check
+    install -m 777 ${S}/systemd_units/scripts/GwProvCheck.sh ${D}/usr/ccsp/pam/GwProvCheck.sh
 }
 
 do_install_class-native () {
@@ -129,6 +132,7 @@ FILES_${PN}-dbg = " \
 FILES_${PN}_append = " \
                      /lib/rdk/rbus_termination_handler.sh \
 		     /usr/ccsp/parodusStartCheck.sh \
+                     /usr/ccsp/pam/GwProvCheck.sh \
                       "
 
 FILES_${PN}-native = " ${bindir}/dm_pack_code_gen.py "
