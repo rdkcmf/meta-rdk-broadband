@@ -1,14 +1,14 @@
-#
+# RDK MANAGEMENT, LLC CONFIDENTIAL AND PROPRIETARY
 # ============================================================================
-# COMCAST C O N F I D E N T I A L AND PROPRIETARY
+# This file (and its contents) are the intellectual property of RDK Management, LLC.
+# It may not be used, copied, distributed or otherwise  disclosed in whole or in
+# part without the express written permission of RDK Management, LLC.
 # ============================================================================
-# This file and its contents are the intellectual property of Comcast.  It may
-# not be used, copied, distributed or otherwise  disclosed in whole or in part
-# without the express written permission of Comcast.
-# ============================================================================
-# Copyright (c) 2018 Comcast. All rights reserved.
+# Copyright (c) 2020 RDK Management, LLC. All rights reserved.
 # ============================================================================
 #
+
+
 SUMMARY = "This receipe provides dhcp manager component support."
 SECTION = "console/utils"
 #LICENSE = "Apache-2.0"
