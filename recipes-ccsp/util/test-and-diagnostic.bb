@@ -2,7 +2,7 @@ SUMMARY = "CCSP test and diagnostice utilities."
 HOMEPAGE = "http://github.com/belvedere-yocto/TestAndDiagnostic"
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=9c4d64ad248641f8dd76f69edff1c27a"
 
 DEPENDS = "ccsp-common-library utopia hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi rbus libev"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
