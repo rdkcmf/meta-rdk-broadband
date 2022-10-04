@@ -83,12 +83,6 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
-
-FILES_${PN}-gtest = "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CosaWanCnctvtyChk_gtest.bin', '', d)} \
-"
-
 FILES_${PN}-ccsp = " \
     ${libdir}/libdiagnostic.so.* \
     ${libdir}/libdmltad.so.* \
@@ -107,12 +101,18 @@ FILES_${PN}-dbg = " \
     ${bindir}/.debug \
     ${libdir}/.debug \
 "
+PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
+
+FILES_${PN}-gtest = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspTandDWanCnctvtyChk_gtest.bin', '', d)} \
+"
 
 DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-CcspTandDSsp', '', d)}"
 inherit comcast-package-deploy
 CUSTOM_PKG_EXTNS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtest', '', d)}"
 SKIP_MAIN_PKG="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
 DOWNLOAD_ON_DEMAND="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'yes', 'no', d)}"
+
 # Breakpad processname and logfile mapping
 BREAKPAD_LOGMAPPER_PROCLIST = "CcspTandDSsp"
 BREAKPAD_LOGMAPPER_LOGLIST = "TDMlog.txt.0"
