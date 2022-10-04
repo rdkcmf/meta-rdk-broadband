@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/belvedere-yocto/TestAndDiagnostic"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=9c4d64ad248641f8dd76f69edff1c27a"
 
-DEPENDS = "ccsp-common-library utopia hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi rbus libev"
+DEPENDS = "ccsp-common-library utopia hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi rbus libev libpcap"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'core-net-lib', ' core-net-lib', " ", d)}"
 require recipes-ccsp/ccsp/ccsp_common.inc
@@ -18,6 +18,7 @@ S = "${WORKDIR}/git"
 
 CFLAGS += " -Wall -Werror -Wextra -Wno-pointer-sign -Wno-sign-compare -Wno-type-limits -Wno-unused-parameter "
 
+RDEPENDS_${PN} += "libpcap"
 RDEPENDS_${PN}_append_dunfell = " bash"
 RDEPENDS_${PN}-ccsp_append_dunfell += " bash"
 
@@ -85,7 +86,7 @@ PACKAGES += "${PN}-ccsp"
 PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', '', d)}"
 
 FILES_${PN}-gtest = "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspTandDSsp_gtest.bin', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CosaWanCnctvtyChk_gtest.bin', '', d)} \
 "
 
 FILES_${PN}-ccsp = " \
