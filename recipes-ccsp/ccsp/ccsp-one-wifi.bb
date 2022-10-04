@@ -77,11 +77,12 @@ do_install_append () {
     install -m 664 ${S}/scripts/process_monitor_atom.sh -t ${D}/usr/ccsp/wifi
     install -m 755 ${S}/scripts/br0_ip.sh -t ${D}/usr/ccsp/wifi
     install -m 755 ${S}/scripts/br106_addvlan.sh -t ${D}/usr/ccsp/wifi
+    install -m 755 ${S}/scripts/copy_wifi_logs.sh -t ${D}/usr/ccsp/wifi
+    install -m 755 ${S}/scripts/wifi_logupload.sh -t ${D}/usr/ccsp/wifi
     install -m 755 ${S}/scripts/lfp.sh -t ${D}/usr/ccsp/wifi
     install -m 755 ${S}/scripts/aphealth.sh -t ${D}/usr/ccsp/wifi
     install -m 755 ${S}/scripts/aphealth_log.sh -t ${D}/usr/ccsp/wifi
     install -m 755 ${S}/scripts/wifivAPPercentage.sh -t ${D}/usr/ccsp/wifi
-
     # Only install services if meshwifi has been defined.
     if ${@bb.utils.contains('DISTRO_FEATURES', 'meshwifi', 'true', 'false', d)}; then
         install -m 755 ${S}/scripts/mesh_aclmac.sh -t ${D}/usr/ccsp/wifi
@@ -146,6 +147,8 @@ FILES_${PN} = "\
     ${prefix}/ccsp/wifi/process_monitor_atom.sh \
     ${prefix}/ccsp/wifi/br0_ip.sh \
     ${prefix}/ccsp/wifi/br106_addvlan.sh \
+    ${prefix}/ccsp/wifi/copy_wifi_logs.sh \
+    ${prefix}/ccsp/wifi/wifi_logupload.sh \
     ${prefix}/ccsp/wifi/lfp.sh \
     ${prefix}/ccsp/wifi/aphealth.sh \
     ${prefix}/ccsp/wifi/aphealth_log.sh \
