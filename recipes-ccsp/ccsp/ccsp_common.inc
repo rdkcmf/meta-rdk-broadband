@@ -34,6 +34,9 @@ CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'webconfig_bin', '-DF
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'interworking', '-DFEATURE_SUPPORT_INTERWORKING', '', d)}"
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'passpoint', '-DFEATURE_SUPPORT_PASSPOINT', '', d)}"
 
+# Add flags to support pausing wifistats while speedtest running if the feature is available.
+CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'wifiStatsDisable', '-DWIFI_STATS_DISABLE_SPEEDTEST_RUNNING', '', d)}"
+
 #Add flags to support RadiusGreyList  if the feature is available.
 CFLAGS_append += " ${@bb.utils.contains('DISTRO_FEATURES', 'RadiusGreyList', '-DFEATURE_SUPPORT_RADIUSGREYLIST', '', d)}"
 
