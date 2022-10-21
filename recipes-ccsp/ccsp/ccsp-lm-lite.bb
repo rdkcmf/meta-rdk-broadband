@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 
 DEPENDS = "ccsp-common-library utopia avro-c msgpack-c trower-base64 util-linux curl libxml2 wrp-c nanomsg libparodus telemetry libsyswrapper libunpriv hal-platform"
 DEPENDS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' safec', " ", d)}"
-DEPENDS_append = "${@bb.utils.contains("DISTRO_FEATURES", "WanFailOverSupportEnable", " rbus rbus-core ", " ", d)}"
+DEPENDS_append = "${@bb.utils.contains("DISTRO_FEATURES", "WanFailOverSupportEnable", " rbus ", " ", d)}"
 require ccsp_common.inc
 
 SRC_URI = "${CMF_GIT_ROOT}/rdkb/components/opensource/ccsp/CcspLMLite;protocol=${CMF_GIT_PROTOCOL};branch=${CMF_GIT_BRANCH};name=CcspLMLite"
@@ -55,12 +55,12 @@ CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec',  ' `pkg-confi
 LDFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', ' `pkg-config --libs libsafec`', '', d)}"
 CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'safec', '', ' -DSAFEC_DUMMY_API', d)}"
 
-LDFLAGS_append = " ${@bb.utils.contains("DISTRO_FEATURES", 'wan-traffic-count', ' -lrbus -lrbus-core -lrtMessage ', '', d)}"
-CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'wan-traffic-count', ' -I${STAGING_INCDIR}/rbus -I${STAGING_INCDIR}/rbus-core -I${STAGING_INCDIR}/rtmessage ', '', d)}"
+LDFLAGS_append = " ${@bb.utils.contains("DISTRO_FEATURES", 'wan-traffic-count', ' -lrbus -lrbuscore -lrtMessage ', '', d)}"
+CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'wan-traffic-count', ' -I${STAGING_INCDIR}/rbus -I${STAGING_INCDIR}/rtmessage ', '', d)}"
 CFLAGS_append  = " ${@bb.utils.contains('DISTRO_FEATURES', 'wan-traffic-count', ' -DWAN_TRAFFIC_COUNT_SUPPORT', '', d)}"
 
-LDFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "WanFailOverSupportEnable", " -lrbus -lrbus-core -lrtMessage ", " ", d)}"
-CFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "WanFailOverSupportEnable", " -I${STAGING_INCDIR}/rbus -I${STAGING_INCDIR}/rbus-core -I${STAGING_INCDIR}/rtmessage ", " ", d)}"
+LDFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "WanFailOverSupportEnable", " -lrbus -lrbuscore -lrtMessage ", " ", d)}"
+CFLAGS_append = "${@bb.utils.contains("DISTRO_FEATURES", "WanFailOverSupportEnable", " -I${STAGING_INCDIR}/rbus -I${STAGING_INCDIR}/rtmessage ", " ", d)}"
 CFLAGS_append = " ${@bb.utils.contains("DISTRO_FEATURES", "WanFailOverSupportEnable", " -DWAN_FAILOVER_SUPPORTED ", " ", d)} "
 
 do_compile_prepend () {
