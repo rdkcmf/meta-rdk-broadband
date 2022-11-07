@@ -31,7 +31,6 @@ Subject: There are multiple sources for this patch file.
 Source: https://lists.quagga.net/pipermail/quagga-dev/2009-July/023362.html
 Signed-off-by: Hagen Paul Pfeifer <hagen at jauu.net>
 Source: OpenEmbedded
-License: GPLv2
 Upstream-Status: Pending
 ---
 

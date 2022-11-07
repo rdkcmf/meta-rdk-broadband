@@ -6,7 +6,6 @@ Subject: [PATCH] RDKB-15501: Upgrade Quagga to 1.2.1 or later
 	rtadv.patch is now added here instead of duplication in other layers.
 	Removing unrecognised configure options.
 Source: Comcast
-License: GPLv2
 Upstream-Status: Pending 
 Signed-off-by: Livin Sunny <livin_sunny2@comcast.com>
 ---

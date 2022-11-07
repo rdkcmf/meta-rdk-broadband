@@ -3,7 +3,6 @@ From: fdf1feb000278ffd83a03d969e2931b6c0ffa56d Jun 7, 2019 7:05 AM
 Subject: [PATCH] RDKB-22331: Add Device.X_RDK_WebConfig.ConfigFile.[i]. dynamic table
 To add Device.X_RDK_WebConfig.ConfigFile.[i]. dynamic table.
 Source: COMCAST 
-License: Apache-2.0
 Upstream-Status: Pending
 Signed-off-by: gayathri_buddappagari@cable.comcast.com
 ---

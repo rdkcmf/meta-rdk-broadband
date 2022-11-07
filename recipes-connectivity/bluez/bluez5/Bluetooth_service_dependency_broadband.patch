@@ -3,7 +3,6 @@ From: 0e1f792ccceceb3592c90a29b396ac2bbcbfca51 Wed Mar 30 00:00:00 2022
 Subject: Created ble service file dependency in bluetooth service as 
          firmware is installed in that
 Source: COMCAST
-License: LGPL-2.0-or-later
 Upstream-Status: Pending
 Signed-off-by: Gururaaja ESR <gururaja_erodesriranganramlingham@comcast.com>
 

@@ -10,7 +10,6 @@ Subject: [PATCH] ARRISXB3-4105: Bringing libupnp on Yocto to 1.6.18 on par with 
 
 Source: COMCAST
 
-License: BSD-2-Clause
 
 Upstream-Status: Pending
 
