@@ -96,6 +96,7 @@ LDFLAGS_append = " \
     -ltelemetry_msgsender \
     -lrbus \
 "
+CFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'custom_ula', '-DCUSTOM_ULA', '', d)}"
 
 LDFLAGS_append_dunfell = " -lsyscfg"
 
@@ -147,6 +148,9 @@ do_compile_prepend () {
         sed -i '2i <?define DDNS_BROADBANDFORUM=True?>' ${S}/config-arm/TR181-USGv2.XML
         fi
 	fi
+        if ${@bb.utils.contains('DISTRO_FEATURES', 'custom_ula', 'true', 'false', d)}; then
+        sed -i '2i <?define CUSTOM_ULA=True?>' ${S}/config-arm/TR181-USGv2.XML
+        fi
     (python ${STAGING_BINDIR_NATIVE}/dm_pack_code_gen.py ${S}/config-arm/TR181-USGv2.XML ${S}/source/PandMSsp/dm_pack_datamodel.c)
 
 }
