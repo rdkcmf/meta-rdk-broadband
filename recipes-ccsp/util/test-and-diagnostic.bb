@@ -105,6 +105,7 @@ PACKAGES =+ "${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${PN}-gtest', 
 
 FILES_${PN}-gtest = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CcspTandDWanCnctvtyChk_gtest.bin', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', '${bindir}/CosaWanCnctvtyChk_gtest.bin', '', d)} \
 "
 
 DOWNLOAD_APPS="${@bb.utils.contains('DISTRO_FEATURES', 'gtestapp', 'gtestapp-CcspTandDSsp', '', d)}"
