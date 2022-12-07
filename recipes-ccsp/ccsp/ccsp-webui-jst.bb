@@ -72,18 +72,13 @@ do_install_append() {
     install -d ${D}/usr/www2/includes
     install -m 755 ${S}/jst/includes/* ${D}/usr/www2/includes
     install -m 755 ${S}/jst/*.* ${D}/usr/www2/
-    install -d ${D}/usr/video_analytics
-    install -d ${D}/usr/video_analytics/test
     install -d ${D}/usr/www2/test
-    install -m 755 ${S}/jst/video_analytics/video_analytics.jst ${D}/usr/video_analytics/test
-    install -m 755 ${S}/jst/video_analytics/OddEvenPattern.test ${D}/usr/video_analytics/test 
     sed -i 's/usr\/www/usr\/www2/g' ${D}${sysconfdir}/webgui.sh
 }
 
 FILES_${PN} += "/fss/* /fss/gw/* /fss/gw/usr/*"
 
 FILES_${PN} += "/usr/*"
-FILES_${PN} += "/usr/video_analytics/*"
 FILES_${PN} += "/usr/www2/actionHandler/*"
 FILES_${PN} += "/usr/www2/cgi-bin/*"
 FILES_${PN} += "/usr/www2/cmn/*"

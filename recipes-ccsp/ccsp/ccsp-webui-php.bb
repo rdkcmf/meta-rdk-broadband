@@ -83,8 +83,6 @@ do_install_append() {
     install -d ${D}/usr/www/cmn/syndication
     install -d ${D}/usr/www/cmn/syndication/device_pause_screen
     install -d ${D}/usr/www/includes
-    install -d ${D}/usr/video_analytics
-    install -d ${D}/usr/video_analytics/test
     install -d ${D}/fss/gw/usr/ccsp
     install -d ${D}${sysconfdir}
     install -m 755 ${S}/../Styles/xb3/code/status-500.html ${D}/usr/www
@@ -100,7 +98,6 @@ do_install_append() {
     install -m 755 ${S}/../Styles/xb3/code/cmn/syndication/img/* ${D}/usr/www/cmn/syndication/img
     install -m 755 ${S}/../Styles/xb3/code/cmn/syndication/device_pause_screen/* ${D}/usr/www/cmn/syndication/device_pause_screen
     install -m 755 ${S}/../Styles/xb3/code/includes/*.php ${D}/usr/www/includes
-    install -m 755 ${S}/../Styles/xb3/code/test/*.php ${D}/usr/video_analytics/test
     install -m 755 ${S}/../Styles/xb3/code/test/OddEvenPattern.test ${D}/usr
     install -m 755 ${S}/../Styles/xb3/config/*.sh ${D}${sysconfdir}
     install ${B}/modules/cosa.so ${D}/fss/gw/usr/ccsp
@@ -132,7 +129,6 @@ FILES_${PN} += " \
      ${systemd_unitdir}/system/cosalogs.service \
      "
 FILES_${PN} += "/usr/*"
-FILES_${PN} += "/usr/video_analytics/*"
 FILES_${PN} += "/usr/www/*"
 FILES_${PN} += "/usr/www/actionHandler/*"
 FILES_${PN} += "/usr/www/CSRF-Protector-PHP/libs/*"
