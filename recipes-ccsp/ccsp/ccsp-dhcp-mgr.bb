@@ -1,8 +1,7 @@
 SUMMARY = "This receipe provides dhcp manager component support."
 SECTION = "console/utils"
-#LICENSE = "Apache-2.0"
-LICENSE = "CLOSED"
-#LIC_FILES_CHKSUM = "file://LICENSE;md5=175792518e4ac015ab6696d16c4f607e"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=8f98bf3e9ebc1788ad35a2e5b0b9191f"
 
 DEPENDS = "ccsp-common-library dbus utopia ccsp-lm-lite"
 DEPENDS_append = " hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi curl ccsp-misc ccsp-hotspot cjson libsyswrapper halinterface libunpriv "
