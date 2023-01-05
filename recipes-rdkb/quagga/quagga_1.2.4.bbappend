@@ -2,6 +2,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI += "file://rtadv.patch"
 SRC_URI += "file://0001-RDKB-20441-zebra-service-fails-to-start.patch"
+SRC_URI += "file://quagga-Avoid-duplicate-connected-address.patch"
 
 SYSTEMD_PACKAGES_remove = "${PN} ${PN}-bgpd ${PN}-isisd ${PN}-ospf6d ${PN}-ospfd ${PN}-ripd ${PN}-ripngd"
 SYSTEMD_SERVICE_${PN}-bgpd_remove = "bgpd.service"
