@@ -8,7 +8,7 @@ DEPENDS = "ccsp-common-library dbus utopia ccsp-lm-lite"
 DEPENDS_append = " hal-cm hal-dhcpv4c hal-ethsw hal-moca hal-mso_mgmt hal-mta hal-platform hal-vlan hal-wifi curl ccsp-misc ccsp-hotspot cjson libsyswrapper halinterface libunpriv "
 require ccsp_common.inc
 SRC_URI = "${RDKB_CCSP_ROOT_GIT}/DhcpManager/generic;protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=DhcpManager"
-CFLAGS += " -Wall -Werror -Wextra -Wno-shift-negative-value"
+CFLAGS += " -Wall -Werror -Wextra -Wno-shift-negative-value -Wno-attribute-warning"
 CFLAGS_append_dunfell = " -Wno-format-truncation -Wno-incompatible-pointer-types -Wno-format-overflow -Wno-deprecated-declarations -Wno-sizeof-pointer-memaccess -Wno-memset-elt-size -Wno-maybe-uninitialized "
 
 S = "${WORKDIR}/git"
