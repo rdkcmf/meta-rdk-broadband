@@ -1398,3 +1398,24 @@ Index: git/source/hostap-2.10/src/utils/wpa_debug.c
  	bin_clear_free(buf, buflen);
  }
  #endif /* CONFIG_NO_HOSTAPD_LOGGER */
+Index: git/source/hostap-2.10/src/ap/accounting.c
+===================================================================
+--- git.orig/source/hostap-2.10/src/ap/accounting.c
++++ git/source/hostap-2.10/src/ap/accounting.c
+@@ -185,6 +185,8 @@ static int accounting_sta_update_stats(s
+ 		sta->last_tx_bytes_lo = data->tx_bytes;
+ 	}
+ 
++#if 0
++//Disabling the below print temporarily as stats features are not completely implemented and below print reports incorrect value
+ 	hostapd_logger(hapd, sta->addr, HOSTAPD_MODULE_RADIUS,
+ 		       HOSTAPD_LEVEL_DEBUG,
+ 		       "updated TX/RX stats: rx_bytes=%llu [%u:%u] tx_bytes=%llu [%u:%u] bytes_64bit=%d",
+@@ -193,6 +195,7 @@ static int accounting_sta_update_stats(s
+ 		       data->tx_bytes, sta->last_tx_bytes_hi,
+ 		       sta->last_tx_bytes_lo,
+ 		       data->bytes_64bit);
++#endif
+ 
+ 	return 0;
+ }
